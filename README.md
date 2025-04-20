@@ -2,6 +2,9 @@
 
 La branche Mistral-v1 correspond à la version 1 de l'outil numérique. Il s'agit d'un MVP.
 
+Plus d'information : https://beta.gouv.fr/startups/mistral-penal.html
+https://mistralpenal.beta.gouv.fr/
+
 ## Présentation générale
 
 L'application **MISTRAL** a pour objectif de fiabiliser la saisie des données pour en garantir la qualité et simplifier l'agrégation des tableaux (limiter les bugs et les risques d'une mauvaise manipulation).
