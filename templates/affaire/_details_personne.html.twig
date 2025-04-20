@@ -1,0 +1,282 @@
+{#
+  MIT License
+
+  Copyright (c) 2025 [Mistral pénal]
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+#}
+
+
+{{form_widget(formAffairePersonne.id)}}
+{% set personne = formAffairePersonne.personne.vars.data %}
+{% set formPersonne = formAffairePersonne.personne %}
+{%
+set isVictime = (
+  formAffairePersonne.statut.vars.data
+  and
+  formAffairePersonne.statut.vars.data.mnemo
+) or (
+  type is defined
+  and
+  type == "victime"
+)
+%}
+
+<div class="fr-col-12">
+    {# IDENTITE #}
+    <p class="affaire-section">{{'personne.display.identite'|trans}}</p>
+    <div class="fr-grid-row">
+        <div class="fr-col-12">
+          <div class="fr-grid-row">
+            <div class="fr-col-3">
+            {{form_widget(formPersonne.isPersonneMorale)}}
+            {#form_widget(formPersonne.isPersonneMorale,{'attr':{'disabled': (not personne is null and personne.idKsp)}})#}
+            </div>
+            <div class="fr-col-3"></div>
+            {% if true == isVictime %}
+            <div class="fr-col-3  fr-pl-1w">
+              <div class="fr-grid-row">
+                <div class="fr-col-11">
+                {{form_widget(formAffairePersonne.changeEtat)}}
+                </div>
+              </div>
+            </div>
+            <div class="fr-col-3">
+            {{form_widget(formAffairePersonne.statut)}}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        {# /SECTION PERSONNE PHYSIQUE #}
+        <div class="fr-col-12 section-personne-physique-{{formPersonne.vars.id}}">
+          <div class="fr-grid-row">
+          {# civilité #}
+          <div class="fr-col-2">{{form_label(formPersonne.civilite)}}</div>
+          <div class="fr-col-4">{{form_widget(formPersonne.civilite)}}</div>
+          <div class="fr-col-3 fr-pl-1w">
+            <div class="fr-grid-row">
+              <div class="fr-col-10">
+              {{ form_widget(formPersonne.xSeDisant) }}
+              </div>
+            </div>
+          </div>
+          <div class="fr-col-1"></div>
+          <div class="fr-col-2 fr-pl-1w">{{ form_widget(formAffairePersonne.mineur) }}</div>
+          {# nom #}
+          <div class="fr-col-2">{{form_label(formPersonne.nom)}}</div>
+          <div class="fr-col-4">{{form_widget(formPersonne.nom)}}</div>
+          <div class="fr-col-2 fr-pl-1w">{{ form_label(formPersonne.nomUsage) }}</div>
+          <div class="fr-col-4 fr-pl-1w">{{ form_widget(formPersonne.nomUsage) }}</div>
+          <div class="fr-col-12 fr-mt-1w"></div>
+          {# prenoms #}
+          <div class="fr-col-2">
+              <label class="form-label">{{'personne.display.prenoms'|trans}}</label>
+          </div>
+          <div class="fr-col-4">{{form_widget(formPersonne.prenom1)}}</div>
+          <div class="fr-col-6">
+              <div class="fr-grid-row">
+              <div class="fr-col-6 fr-pl-1w">{{form_widget(formPersonne.prenom2)}}</div>
+              <div class="fr-col-6 fr-pl-1w">{{form_widget(formPersonne.prenom3)}}</div>
+              </div>
+          </div>
+          <div class="fr-col-12 fr-mt-1w"></div>
+
+          {# naissance #}
+
+          <div class="fr-col-2">{{form_label(formPersonne.dateNaissance)}}</div>
+          <div class="fr-col-4">{{ form_widget(formPersonne.dateNaissance) }}</div>
+          <div class="fr-col-2 form-label fr-pl-1w fr-pt-1w">à</div>
+          <div class="fr-col-4">{{ form_widget(formPersonne.communeNaissance) }}</div>
+
+          <div class="fr-col-12 fr-mt-1w"></div>
+          <div class="fr-col-2 fr-pl-1w">{{ form_label(formPersonne.paysNaissance) }}</div>
+          <div class="fr-col-4">{{ form_widget(formPersonne.paysNaissance) }}</div>
+          <div class="fr-col-12 fr-mt-1w"></div>
+
+          {# naissance #}
+          <div class="fr-col-2">{{ form_label(formPersonne.nationalite) }}</div>
+          <div class="fr-col-4">{{ form_widget(formPersonne.nationalite) }}</div>
+          <div class="fr-col-2 fr-pl-1w">{{form_label(formPersonne.situationFamilliale)}}</div>
+          <div class="fr-col-4">{{form_widget(formPersonne.situationFamilliale)}}</div>
+          <div class="fr-col-12 fr-mt-1w"></div>
+
+          {# deces #}
+          {% if typePersonne == "prevenue" %}
+              {% set disabledDeces = "disabled" %}
+              {% if formPersonne.isDecede.vars.value == "1" %}
+                  {% set disabledDeces = "disable" %}
+              {% endif %}
+              <div class="fr-col-2" >
+                  {{
+                  form_widget(formPersonne.isDecede,
+                  {
+                      attr : {
+                          "toggle-target" : "toggle-id-deces-" ~ formAffairePersonne.vars.value.id ~ "-date"
+                      }
+                  })
+                  }}
+              </div>
+              <div class="fr-col-4">{{
+                  form_widget(
+                      formPersonne.dateDeces,
+                      {
+                      id : "toggle-id-deces-" ~ formAffairePersonne.vars.value.id ~ "-date",
+                      attr : {
+                          (disabledDeces) : disabledDeces,
+                      }
+                      }
+                  )
+                  }}
+              </div>
+              <div class="fr-col-2 fr-pl-1w">{{form_label(formPersonne.profession)}}</div>
+              <div class="fr-col-4">{{form_widget(formPersonne.profession)}}</div>
+              <div class="fr-col-12 fr-pl-1w"></div>
+          {% endif %}
+          {# /SECTION PERSONNE PHYSIQUE #}
+          </div>
+        </div>
+        {# SECTION PERSONNE MORALE #}
+        <div class="fr-col-12 section-personne-morale-{{formPersonne.vars.id}}">
+          <div class="fr-grid-row">
+            <div class="fr-col-2">{{form_label(formPersonne.raisonSociale)}}</div>
+            <div class="fr-col-4">{{form_widget(formPersonne.raisonSociale)}}</div>
+            <div class="fr-col-2 fr-pl-1w">{{form_label(formPersonne.enseigne)}}</div>
+            <div class="fr-col-4">{{form_widget(formPersonne.enseigne)}}</div>
+            <div class="fr-col-12 fr-mt-1w"></div>
+            <div class="fr-col-2">{{form_label(formPersonne.sigle)}}</div>
+            <div class="fr-col-4">{{form_widget(formPersonne.sigle)}}</div>
+            <div class="fr-col-2 fr-pl-1w">{{form_label(formPersonne.sirenSiret)}}</div>
+            <div class="fr-col-4">{{form_widget(formPersonne.sirenSiret)}}</div>
+            <div class="fr-col-12 fr-mt-1w"></div>
+            <div class="fr-col-2">{{form_label(formPersonne.formeJuridique)}}</div>
+            <div class="fr-col-4">{{form_widget(formPersonne.formeJuridique)}}</div>
+            <div class="fr-col-12 fr-mt-1w"></div>
+          </div>
+        </div>
+        {# /SECTION PERSONNE MORALE #}
+        {# adresse #}
+        <div class="fr-col-2">{{ form_label(formPersonne.adresse) }}</div>
+        <div class="fr-col-4">{{ form_widget(formPersonne.adresse.ligne1) }}</div>
+        <div class="fr-col-2 fr-pl-1w">{{ form_label(formPersonne.adresse.codePostal) }}</div>
+        <div class="fr-col-4">{{ form_widget(formPersonne.adresse.codePostal) }}</div>
+        <div class="fr-col-12 fr-mt-1w"></div>
+        <div class="fr-col-2"></div>
+        <div class="fr-col-4">{{ form_widget(formPersonne.adresse.ligne2) }}</div>
+        <div class="fr-col-2 fr-pl-1w">{{ form_label(formPersonne.adresse.localite) }}</div>
+        <div class="fr-col-4">{{ form_widget(formPersonne.adresse.localite) }}</div>
+        <div class="fr-col-12 fr-mt-1w"></div>
+        <div class="fr-col-2"></div>
+        <div class="fr-col-4">{{ form_widget(formPersonne.adresse.ligne3) }}</div>
+        <div class="fr-col-2 fr-pl-1w">{{ form_label(formPersonne.adresse.pays) }}</div>
+        <div class="fr-col-4">{{ form_widget(formPersonne.adresse.pays) }}</div>
+        <div class="fr-col-12 fr-mt-1w"></div>
+
+        {# Domicile #}
+        {% if typePersonne == "prevenue" %}
+            <div class="fr-col-2">
+                {% set disabledAdresse = "disable" %}
+                {% if formPersonne.vars.value.declarationAdresse == "1" %}
+                    {% set disabledAdresse = "disabled" %}
+                {% endif %}
+                <label class="form-label">
+                {{form_widget(formPersonne.declarationAdresse, { attr : { (disabledAdresse) : disabledAdresse }})}} {{'personne.field.date_declaration_adresse'|trans}}
+                </label>
+            </div>
+            <div class="fr-col-3">{{ form_widget(formPersonne.dateDeclarationAdresse, { attr : { (disabledAdresse) : disabledAdresse }})}}</div>
+
+            {% set disabledSDF = "disabled" %}
+            {% if formPersonne.isSansDomicile.vars.value == "1" %}
+                {% set disabledSDF = "disable" %}
+            {% endif %}
+            <div class="fr-col-3 fr-pl-2w" >
+              <span class="section-sans-domicile-{{formPersonne.vars.id}}">
+                {{
+                form_widget(
+                    formPersonne.isSansDomicile,
+                    {
+                    attr : {
+                        "toggle-target" : "toggle-id-sdf-" ~ formPersonne.vars.value.id ~ "-content"
+                    }
+                    }
+                )
+                }}
+              </span>
+            </div>
+            <div class="fr-col-3">
+              <span class="section-sans-domicile-{{formPersonne.vars.id}}">
+                {{
+                form_widget(
+                    formPersonne.sansDomicile,
+                    {
+                    id : "toggle-id-sdf-" ~ formPersonne.vars.value.id ~ "-content",
+                    attr : {
+                        (disabledSDF) : disabledSDF
+                    }
+                    }
+                )
+                }}
+              </span>
+            </div>
+
+            <div class="fr-col-12 fr-mt-1w"></div>
+            <div class="fr-col-2">{{ form_label(formAffairePersonne.modePoursuite) }}</div>
+            <div class="fr-col-4">{{ form_widget(formAffairePersonne.modePoursuite) }}</div>
+            <div class="fr-col-2 fr-pl-1w fr-mt-n1w">{{ form_label(formPersonne.antecedentJudiciaire) }}</div>
+            <div class="fr-col-4">{{ form_widget(formPersonne.antecedentJudiciaire) }}</div>
+            <div class="fr-col-12 fr-mt-1w"></div>
+            <div class="fr-col-2">
+                {% set disabledDefere = "disable" %}
+                {% if formAffairePersonne.vars.value.isDefere == "1" %}
+                {% set disabledDefere = "disabled" %}
+                {% endif %}
+                <label class="form-label">
+                {{form_widget(formAffairePersonne.isDefere, { attr : { (disabledDefere) : disabledDefere } })}} {{'affaire_personne.field.is_defere'|trans}}
+                </label>
+            </div>
+            <div class="fr-col-4">{{form_widget(formAffairePersonne.dateDeferement, { attr : { (disabledDefere) : disabledDefere } })}}</div>
+            <div class="fr-col-2 fr-pl-1w fr-mt-n2w">{{ form_label(formPersonne.categoriePenale) }}</div>
+            <div class="fr-col-4">{{ form_widget(formPersonne.categoriePenale) }}</div>
+            <div class="fr-col-12"></div>
+        {% endif %}
+    </div>
+
+    {# FILIATION #}
+    {% if typePersonne == "prevenue" %}
+        <br/>
+        <span class="section-filiation-{{formPersonne.vars.id}}">
+        {% include 'affaire/_details_filiation.html.twig' with {'formPersonne': formPersonne, 'typePersonne' : typePersonne} %}
+        </span>
+    {% endif %}
+
+    {# REPRESENTANTS LEGAUX #}
+        <br/>
+        <p class="affaire-section">{{'personne.display.representant_legal'|trans}}</p>
+        {% include 'affaire_personne/_representant_legal.html.twig' with { 'formAffaire': formAffaire, 'formAffairePersonne': formAffairePersonne, 'personne': personne } %}
+
+    {# QUALIFICATIONS #}
+    {% if typePersonne == "prevenue" %}
+        <br/>
+        <p class="affaire-section">{{'personne.display.qualifications'|trans}}</p>
+        {% include 'affaire_personne/_natinfs.html.twig' with { 'formAffaire': formAffaire, 'formAffairePersonne': formAffairePersonne, 'personne': personne } %}
+    {% endif %}
+
+    {# CONVOCATION #}
+    {% include 'affaire/_details_convocation.html.twig' with {'formAffairePersonne': formAffairePersonne, 'typePersonne' : typePersonne} %}
+
+</div>

@@ -1,0 +1,13 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    date:
+        timezone: Europe/Paris
+    globals:
+        base_url: "%base_url%"
+        app_env: "%app_env%"
+    form_themes:
+        - 'customization.html.twig'
+        - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+when@test:
+    twig:
+        strict_variables: true

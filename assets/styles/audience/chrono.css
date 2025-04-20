@@ -1,0 +1,13 @@
+
+.chrono-container{
+    text-align: end;
+}
+
+.chrono-btn{
+    width:250px;
+}
+.fr-btn--icon-left:before {
+    --icon-size: 1.5rem !important;
+    margin-left: -0.125rem;
+    margin-right: 0.5rem;
+}

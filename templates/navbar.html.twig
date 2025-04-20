@@ -1,0 +1,79 @@
+{#
+  MIT License
+
+  Copyright (c) 2025 [Mistral pénal]
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+#}
+
+
+<nav id="nav-left" class="fr-grid-row" aria-labelledby="fr-sidemenu-title" >
+  <div class="fr-col-12 menu-left">
+      <div  id="menu-left" class="">
+        <a href="{{ path('homepage') }}" title="{{'globals.app_welcome'|trans}}">
+          <div class="mistral-logo">
+          </div>
+        </a>
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and not is_granted('ROLE_ADMIN_FONC') %}
+            <div class="menu-left-link fr-pl-3v">
+                <ul class="menu-left-ul">
+                    <li>
+                      <a
+                        class="calendar{% if app.request.attributes.get('_route') == 'homepage'  %}-selected{% endif %}"
+                        href="{{ path('homepage') }}"
+                        target="_self"
+                        title="Calendrier"
+                      ></a>
+                    </li>
+                    {% if app.request.attributes.get('_route') == 'affaire_edit_general'  %}
+                        <li>
+                          <a
+                            class="directory-selected"
+                            href="{{ path('app_import_index') }}"
+                            target="_self"
+                            title="Édition de l’audience"
+                          ></a>
+                        </li>
+                    {% endif %}
+                    <li>
+                      <a
+                        class="ball-pen{% if app.request.attributes.get('_route') == 'app_mot_rapide_index'  %}-selected{% endif %}"
+                        href="{{path('app_mot_rapide_index')}}"
+                        target="_self"
+                        title="Mots rapides"
+                      ></a>
+                    </li>
+
+                </ul>
+            </div>
+        
+
+        <div id="account" class="fr-pl-3v">
+          <a
+            class="account{% if app.request.attributes.get('_route') == 'app_compte_index'  %}-selected{% endif %}"
+            href="{{path('app_compte_index')}}"
+            target="_self"
+            title="Compte"
+          ></a>
+        </div>
+
+        {% endif %}
+      </div>
+    </div>
+</nav>

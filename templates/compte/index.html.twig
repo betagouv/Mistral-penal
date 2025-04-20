@@ -1,0 +1,126 @@
+{#
+  MIT License
+
+  Copyright (c) 2025 [Mistral pénal]
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+#}
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}{{'compte.index.title'|trans}}{% endblock %}
+
+{% block javascripts %}
+  {{parent()}}
+{% endblock %}
+
+{% block body %}
+<div class="fr-grid-row">
+    <div class="fr-col-12 audience-bandeau fr-p-2w">
+        <div class="fr-grid-row">
+            <div class="fr-col-1 fr-pl-3w">
+                <img
+                src="{{ asset('build/images/avatar.svg') }}"
+                alt="avatar"
+                height="60px"
+                width="60px"
+                />
+            </div>
+            <div class="fr-col-9 fr-mt-2w">
+                <h2>{{'compte.index.title'|trans}}</h2>
+            </div>
+            <div class="fr-col-2 fr-mt-1w">
+                <a href="{{path('logout')}}" class="fr-btn"><i class="ri-logout-box-r-line fr-pr-1w"></i>
+                {{'compte.btn.logout'|trans}}</a>
+            </div>
+        </div>
+    </div>
+    <div class="fr-col-12 fr-mt-4w"></div>
+</div>
+<div class="fr-grid-row fr-px-3w" >
+    <div class="fr-col-12 compte-informations">
+        <div class="fr-grid-row">
+            <div class="fr-col-2 compte-informations-title fr-ml-5w">Informations</div>
+        </div>
+    </div>
+    <div class="fr-col-12 fr-mt-5w"></div>
+    <div class="fr-col-12 compte-informations-text fr-pl-3w">
+        <strong>{{'compte.index.utilisateur'|trans}}</strong>: {{account.username}}
+    </div>
+    <div class="fr-col-12 compte-informations-text fr-pl-3w fr-pt-1v">
+        <strong>{{'compte.field.roles'|trans}}</strong>: {{account.rolesPlaintext}}
+    </div>
+    <div class="fr-col-12 compte-informations-text fr-pl-3w fr-pt-1v">
+        <strong>Version courante :</strong>
+        <table class="fr-table" border="1">
+          <tr>
+            <th>Date</th>
+            <th>Utilisateur</th>
+            <th>Message technique</th>
+          </tr>
+          {% for log in logs %}
+          <tr>
+            <td>{{log.date}}</td>
+            <td>{{log.user}}</td>
+            <td>{{log.action}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+    </div>
+
+    <div class="fr-col-12 fr-mt-5w"></div>
+    <div class="fr-col-12">
+        <div class="importation-ksp">
+            <i id="icon-info" class="info-blue-icon">&emsp;&nbsp;</i>&ensp;
+            <span id="importation-message" class="importation-message">
+                Vous êtes connecté grâce à vos identifiants Cassiopée. Consultez-le pour visualiser ou éditer vos identifiants.
+            </span>
+        </div>
+    </div>
+    <div class="fr-col-12 compte-footer"></div>
+</div>
+
+
+    {# <div class="fr-col-12 fr-table">
+      <table>
+        <caption>{{'compte.field.services'|trans}}</caption>
+        <thead>
+          <th>{{'service.field.libelle'|trans}}</th>
+          <th>{{'service.field.mnemo'|trans}}</th>
+          <th>{{'service.field.tribunal'|trans}}</th>
+          <th>{{'service.field.date_start'|trans}}</th>
+          <th>{{'service.field.date_end'|trans}}</th>
+          <th>{{'service.field.remplacant'|trans}}</th>
+        </thead>
+        <tbody>
+          {% for accountService in account.accountServices %}
+          <tr>
+            <td>{{accountService.service.label}}</td>
+            <td>{{accountService.service.mnemo}}</td>
+            <td>{{accountService.service.tribunal}}</td>
+            <td>{{accountService.service.dateStart ? accountService.service.dateStart|date('d/m/Y') : ''}}</td>
+            <td>{{accountService.service.dateEnd ? accountService.service.dateEnd|date('d/m/Y') : ''}}</td>
+            <td>{{accountService.replacement ? 'globals.yes'|trans : 'globals.no'|trans}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div> #}
+{% endblock %}

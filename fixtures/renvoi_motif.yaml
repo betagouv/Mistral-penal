@@ -1,0 +1,5 @@
+App\Entity\RenvoiMotif:
+    motif_1:
+        libelle: "à la demande des parties"
+    motif_2:
+        libelle: "absence avis JAP"

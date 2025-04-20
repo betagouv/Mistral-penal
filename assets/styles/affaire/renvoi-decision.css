@@ -1,0 +1,189 @@
+
+.renvoi-card, .decision-card {
+    padding: 20px 20px 20px 20px;
+    border-radius: 4px;
+    border: 1px solid rgba(221,221,221,1);
+  }
+
+.auto-record-status {
+   width: 100%;
+   position:absolute;
+   display:flex;
+   flex-direction:row-reverse;
+   margin-top:10px
+}
+
+.auto-record-badge-new {
+   margin-right:10px;
+}
+.auto-record-badge-new.fr-badge {
+   width:245px !important;
+}
+
+.auto-record-badge-succes {
+   margin-right:10px;
+}
+
+.auto-record-badge-succes.fr-badge {
+   width:125px !important;
+}
+
+  .decision-natinf {
+      align-items: center;
+      border-radius: 4px;
+      display: inline-flex;
+      flex-direction: row;
+      justify-content: center;
+      line-height: 1.5rem;
+      min-height: 2rem;
+      min-width: 2.25rem;
+      padding: .25rem .75rem;
+      width: -moz-fit-content;
+      width: fit-content;
+      background-color: #F5F5FE;
+      color: #000091;
+      font-family: Marianne;
+      font-weight: 700;
+      font-size: 16px;
+  }
+
+  .natinf-code{
+    color: var(--light-text-title-grey, #161616);
+    /* 2.Corps de texte/MD - Texte standard/Desktop & Mobile - Regular */
+    font-family: Marianne;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+  }
+
+  .natinf-libelle{
+    display: inline-block;
+    white-space: nowrap;
+    width:350px;
+    overflow: hidden;
+    color: var(--light-text-mention-grey, #666);
+    text-overflow: ellipsis;
+    /* 2.Corps de texte/XS - Texte mention/Desktop & Mobile - Regular */
+    font-family: Marianne;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 166.667% */
+  }
+
+  .renvoi-border {
+    border: 1px solid rgba(221,221,221,1);
+  }
+
+  .renvoi-modal-submit, .decision-modal-submit {
+      direction: rtl;
+  }
+
+  .renvoi-modal-title{
+    color: var(--light-text-title-blue-france, #000091);
+    /* 2.Corps de texte/LG - Texte article/Desktop & Mobile - Bold */
+    font-family: Marianne;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px; /* 155.556% */
+  }
+  .renvoi-modal-statut{
+      float:right;
+      font-size:12px;
+      font-weight:500;
+      font-family: Marianne;
+      color: #666666;
+  }
+
+
+  .renvoi-number, .decision-number{
+      width: 23px;
+      height: 24px;
+      padding: 0px 8px 0px 8px;
+      border-radius: 4px;
+      gap: 4px;
+      background: #F5F5FE;
+      font-family: Marianne;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 24px;
+      letter-spacing: 0em;
+      text-align: left;
+      color: #000091;
+  }
+
+  .dropbtn {
+      --idle: transparent;
+      --hover: var(--background-contrast-grey-hover);
+      --active: var(--background-contrast-grey-active);
+      --data-uri-svg: url(data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Cpath fill=%27%23161616%27 d=%27m12 13.1 5-4.9 1.4 1.4-6.4 6.3-6.4-6.4L7 8.1l5 5z%27/%3E%3C/svg%3E);
+      appearance: none;
+      background-color: var(--background-contrast-grey);
+      background-image: var(--data-uri-svg);
+      background-position: calc(100% - .5rem) 50%;
+      background-repeat: no-repeat;
+      background-size: 1.5rem 1.5rem;
+      border-radius: .25rem .25rem 0 0;
+      line-height: 1.5rem;
+      padding: .5rem 2.5rem .5rem 1rem;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      font-family: Marianne;
+      background-color: var(--background-contrast-grey);
+      background-size: 1.5rem 1.5rem;
+      border-radius: .25rem .25rem 0 0;
+      box-shadow: inset 0 -2px 0 0 var(--border-plain-grey);
+      color: var(--text-title-grey);
+      width: 100%;
+   }
+
+   .dropbtn:hover,
+   .dropbtn:focus {
+      background-color: var(--background-contrast-grey);
+   }
+
+   .dropdown {
+      position: relative;
+      /* display: inline-block; */
+   }
+
+   .dropdown-content {
+      display: none;
+      position: absolute;
+      min-width: 160px;
+      overflow: hidden;
+      z-index: 1;
+      background-color: var(--background-contrast-grey);
+      filter: drop-shadow(0 1mm 1mm rgba(5, 5, 5, 0.4));
+   }
+  
+   .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+   }
+  
+   .show {
+      display: block;
+   }
+  
+   .dropdown label:before {
+      box-shadow: inset 0 0 0 1px #161fad !important;
+      background-color: white;
+  }
+
+  .button-icon-delete{
+   width:50px; 
+   height:40px; 
+   border: 1px solid #B34000;
+   color:#B34000;
+   box-shadow: inset 0 0 0 1px #B34000;
+  }
+
+  .content-modal-decision {
+   margin-bottom: 1rem;
+  }

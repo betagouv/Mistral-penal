@@ -1,0 +1,4 @@
+INSERT INTO webapp.modulation_peine(id, code, libelle, mnemo, ordre)VALUES(nextval('webapp.modulation_peine_id_seq'), '999', 'Cause légale diminution peine','', '1') ON CONFLICT DO NOTHING;
+INSERT INTO webapp.modulation_peine(id, code, libelle, mnemo, ordre)VALUES(nextval('webapp.modulation_peine_id_seq'), '999', 'Nouvelle récidive','', '2') ON CONFLICT DO NOTHING;
+INSERT INTO webapp.modulation_peine(id, code, libelle, mnemo, ordre)VALUES(nextval('webapp.modulation_peine_id_seq'), '999', 'Récidive','', '3') ON CONFLICT DO NOTHING;
+INSERT INTO webapp.modulation_peine(id, code, libelle, mnemo, ordre)VALUES(nextval('webapp.modulation_peine_id_seq'), '999', 'Réduction de la peine encourue','', '4') ON CONFLICT DO NOTHING;

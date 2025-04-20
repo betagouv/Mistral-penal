@@ -1,0 +1,343 @@
+account:
+  fields:
+    submit: "Enregistrer"
+    password: "Mot de passe"
+    password_repeat: "Mot de passe (répéter)"
+  index:
+    title: "Mon compte"
+audience:
+  affaires: "Dossiers"
+  number_by_month: "audiences"
+  maj: "Mise à jour"
+  btn:
+    export_roles: "Export rôle"
+    export_note_audience: "Exporter la note d'audience"
+  show_note_audience:
+    title: "Ma note d'audience"
+compte:
+  index:
+    title: "Mon compte"
+    utilisateur: "Utilisateur"
+  field:
+    services: "Mes services"
+    username: "Nom complet"
+    roles: "Rôles"
+  btn:
+    logout: 'Déconnexion'
+error:
+  invalid_credentials: "Une exception d'authentification s'est produite."
+  invalid_habilitations: "L'utilisateur n'est pas habilité à utiliser MISTRAL. Veuillez contacter les administrateurs fonctionnels suivants : %adminFonctionnels%"
+globals:
+  yes: "Oui"
+  no: "Non"
+  date: " jj / mm / aaaa"
+  non_renseigne: "Non renseigné"
+  actions: "Actions"
+  app_name: MISTRAL
+  app_welcome: "Accueil - MISTRAL"
+  back_to_list: "Retour à la liste"
+  default_title: "Bienvenue sur l'application MISTRAL"
+  btn:
+    import_audience: "Importer l'audience"
+    import: "Importer"
+    submit: "Valider"
+    add: "Ajouter"
+    edit: "Modifier"
+    save: "Sauvegarder"
+    save_alternative: "Enregistrer"
+    close: "Fermer"
+  calendar:
+    day: "jour"
+    number_of_week: "N° semaine"
+    january:
+      full: "Janvier"
+      short: "Janv."
+    february:
+      full: "Février"
+      short: "Fév."
+    march:
+      full: "Mars"
+      short: "Mars"
+    april:
+      full: "Avril"
+      short: "Avr."
+    may:
+      full: "Mai"
+      short: "Mai"
+    june:
+      full: "Juin"
+      short: "Juin"
+    july:
+      full: "Juillet"
+      short: "Juil."
+    august:
+      full: "Août"
+      short: "Août"
+    september:
+      full: "Septembre"
+      short: "Sept."
+    october:
+      full: "Octobre"
+      short: "Oct."
+    november:
+      full: "Novembre"
+      short: "Nov."
+    december:
+      full: "Décembre"
+      short: "Déc."
+    sunday:
+      full: "Dimanche"
+      short: "Dim."
+    monday:
+      full: "Lundi"
+      short: "Lun."
+    tuesday:
+      full: "Mardi"
+      short: "Mar."
+    wednesday:
+      full: "Mercredi"
+      short: "Mer."
+    thursday:
+      full: "Jeudi"
+      short: "Jeu."
+    friday:
+      full: "Vendredi"
+      short: "Ven."
+    saturday:
+      full: "Samedi"
+      short: "Sam."
+    status:
+      importe: "Import "
+      non_importe: "Non importé"
+  no_records_found: "Aucun enregistrement trouvé"
+import:
+  audience:
+    title: "Import des informations d'audience de %month% %year%"
+    small_title: "Liste des audiences du mois"
+    audiences: "Audiences"
+  affaire:
+    title: "Audiences"
+    subtitle: "Import des dossiers en cours (#percent#% terminés)"
+    comment: "Nous récupérons les dossiers de l'audience dans Cassiopée. Ne fermez pas cette fenêtre jusqu'à la fin de l'import. Les dossiers seront conservés sur Mistral pendant 20 jours après la date de l'audience."
+    error: "Nous n'avons pas pu importer les dossiers de l'audience. Vérifiez votre réseau et réessayez."
+    refresh: "Relancer l'import"
+  calendar:
+    title: "Import des informations du calendrier"
+    field:
+      year: "Année"
+  index:
+    title: "Mes imports"
+  iteratif:
+    title: "Import"
+    btn: "Lancer l'import des audiences et affaires"
+instance_of_service:
+  admin_func_change_mdp:
+    title: "Changement du mot de passe"
+    text: "Votre mot de passe est expiré, veuillez le mettre à jour"
+    info: "Le mot de passe doit contenir au moins un caractère particulier (#?!...), être d'une longueur supérieure à 8 caractères et être composé d'au moins un chiffre"
+    err_on_special_char: "Il faut au moins un caractère spécial (?#...)"
+    err_on_numeric: "Il faut au moins un chiffre dans le mot de passe"
+    invalid_password: "Le mot de passe doit être différent du mot de passe précédent"
+    password_allready_used: "Le mot de passe ne peut pas être un ancien mot de passe utilisé précédemment"
+  admin_func:
+    title: "Gestion des utilisateurs autorisés à accéder à MISTRAL"
+  index:
+    title: "Mes audiences"
+  show:
+    title: "Mon audience"
+  type:
+    collegial: "Collégial"
+    juge-unique: "Juge unique"
+login:
+  username: "Identifiant"
+  password: "Mot de passe"
+  password_checkbox: "Afficher le mot de passe"
+  remember_me: "Se souvenir de moi"
+  submit: "Se connecter"
+  password_lost: "Mot de passe oublié ?"
+  help:
+    username: "L'identifiant doit correspondre à celui utilisé dans cassiopée"
+  error: "Erreur lors de la tentative de connexion"
+mot_rapide:
+  index:
+    title: "Mes mots rapides"
+  new:
+    title: "Ajouter un mot rapide"
+  field:
+    code: "Raccourci"
+    libelle: "Texte associé"
+security:
+  login:
+    title: "Connexion à MISTRAL"
+affaire:
+  btn:
+    add_victime: "Ajouter une victime"
+    del_victime: "Supprimer la victime"
+  intervenant:
+    president: "Président.e"
+    ministere: "Ministère public"
+    assesseur1: "Assesseur.se"
+    assesseur2: "Assesseur.se"
+    greffier: "Greffier.e"
+  personne: ~
+  panel:
+    informations: "Informations"
+    deroulement_debat: "Déroulement des débats"
+    decision: "Décision"
+  edit:
+    title: "Affaire %identifiant_justice%"
+  display:
+    juges: "Jugé.e.s"
+    composition: "Composition"
+    avec_scelle: "Scellé"
+    sans_scelle: "Pas de scellé"
+    identifiant_justice: "N° %identifiant_justice%"
+    prevenus: "Prévenu.e.s"
+    victimes: "Victimes / Parties civiles"
+  field:
+    numero_parquet: "N°"
+adresse:
+  field:
+    pays : "Pays"
+    codePostal : "Code postal"
+    localite : "Ville"
+    lieu_dit : "Lieu dit"
+personne:
+  display:
+    representant_legal: "Représentant légal"
+    filiation: "Filiation"
+    identite: "Identité"
+    prenoms: "Prénom(s)"
+    qualifications: "Qualifications"
+  field:
+    adresse: "Adresse"
+    antecedent_judiciaire: "Antécédents judiciaires"
+    categorie_penale: "Catégorie pénale"
+    civilite: "Civilité"
+    communeNaissance: "communeNaissance"
+    date_deces: "jj / mm / aaaa"
+    date_declaration_adresse: "Déclarée le"
+    dateNaissance: "Né(e) le"
+    declarationAdresse: "declarationAdresse"
+    enseigne: "Enseigne"
+    forme_juridique: "Forme juridique"
+    is_decede: "Décédé"
+    is_personne_morale: "Personne morale"
+    is_sans_domicile: "Sans domicile"
+    mere: "Mère"
+    nationalite: "Nationalité"
+    nom: "Nom naissance"
+    nom_usage: "Nom d'usage"
+    paysNaissance: "Pays"
+    pere: "Père"
+    prenom1: "Prénom 1"
+    prenom2: "Prénom 2"
+    prenom3: "Prénom 3"
+    profession: "Profession"
+    raison_sociale: "Raison sociale"
+    sansDomicile: "Sans domicile"
+    sigle: "Sigle"
+    siren_siret: "Siren/Siret"
+    situation_familliale: "Situation fam."
+    telephone: "Téléphone"
+    xsedisant: "X se disant"
+affaire_natinf:
+  btn:
+    revert: "Annuler les modifications"
+    update: "Disqualification / requalification / modification"
+    disqual_requal: "Disqualification / requalification / modification"
+  display:
+    old_natinf: "Ancienne qualification"
+    new_natinf: "Qualification"
+    personne: "Personne"
+    personnes_impliquees: "Appliquer les modifications à :"
+    statut: "Statut"
+    disqualifie: "Disqualification"
+    pre_label_disqual: "Initiale : "
+    post_label_disqual: "(Disqual/requal)"
+  field:
+    commune: "à"
+    lieu: "Lieu"
+    qualification_developpee: "Qualification développée"
+affaire_personne:
+  field:
+    statut: "Changer l'état"
+    is_visio: "Visio"
+    debut_visio: "De"
+    fin_visio: " à "
+    nature_jugement: "Nature jugement"
+    date_convocation: "Date convocation"
+    mode_comparution: "Mode comparution"
+    mode_poursuite: "Mode de poursuite"
+    mode_convocation: "Mode convocation"
+    assiste_de: "Assisté de"
+    nomComplet: "nomComplet"
+    avocat: "Représenté par"
+    mineur: "Mineur.e"
+    is_defere: "Déféré(e)"
+    dateDeferement: "dateDeferement"
+natinf:
+  modal:
+    title: "Modification de la qualification"
+    requal_disqual_title: "Requalifier / Disqualifier / Modifier"
+operateur_horodatage:
+  display:
+    start: "Début"
+    end: "Fin"
+  field:
+    operateur: ""
+    date: ""
+parente:
+  field:
+    mere:
+      nom: "Nom de naissance"
+    nom: "Nom"
+    prenoms: "Prénom(s)"
+renvoi:
+  title: "Renvoi"
+  field:
+    motif: "Motif du renvoi"
+    date: "Date du renvoi"
+    affairePersonnes: "Parties"
+    mesureSurete:
+      title: "Mesure de sûrete"
+      empty: "Pas de mesure de sûreté"
+    detailsMesureSurete:
+      title: "Détails de la mesure de sûreté"
+      placeholder: "Entrez les détails de la mesure de sûreté ici..."
+    expertise:
+      title: "Observations"
+      placeholder: "Entrez les observations ici (expertise, ...)"
+decision:
+  title: "Décision(s)"
+  field:
+    peines:
+      title: "Peines"
+      placeholder: "Détaillez ici les peines principales et complémentaires à afficher dans la note d'audience et le rôle"
+    affaireNatinfs:
+      title: "Qualifications"
+      placeholder: "Sélectionnez les NATINFS concernnées"
+    decisionPrevention:
+      title: "Décision sur la prévention"
+      placeholder: "Choisir la décision"
+    decisionSanction:
+      title: "Décision sur la sanction"
+      placeholder: "Choisir la décision"
+    modulationPeine :
+      title: "Modulation de la peine"
+      placeholder: "Modulation de la peine"
+    numeroMinute:
+      title: "Numéro de la minute"
+      placeholder: "2024/0001"
+      help: "Laisser vide si non rattaché à une minute"
+service:
+  field:
+    date_start: "Ouverture"
+    date_end: "Fermeture"
+    libelle: "Libellé"
+    mnemo: "Mnémonique"
+    tribunal: "Tribunal"
+    remplacant: "Remplacant"
+global:
+  message:
+    same_password: "Les mots de passe doivent être identiques !"

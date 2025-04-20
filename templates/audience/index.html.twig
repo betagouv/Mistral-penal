@@ -1,0 +1,93 @@
+{#
+  MIT License
+
+  Copyright (c) 2025 [Mistral pénal]
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+#}
+
+
+{% extends 'base.html.twig' %}
+{% block title %}{{'instance_of_service.index.title'|trans}}{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('audience_index') }}
+  {{ encore_entry_script_tags('import_audience') }}
+  {{ encore_entry_script_tags('import_calendar') }}
+  <script>
+{#    var audiences = '{{ audiences|serialize("json", { groups: "read" })|e("js") }}'; #}
+    var audiences = '{{audiences | serialize("json") | e('js')}}';
+  </script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('audience_index') }}
+{% endblock %}
+
+{% block body %}
+
+{{ form_start(form) }}
+<div class="fr-grid-row" style="background-color:#F5F5FE; height:124px">
+  <div class="fr-col-1 fr-pl-2w fr-pt-4w ">
+    <img
+      src="{{ asset('build/images/calendar-checked.svg') }}"
+      alt="Calendrier"
+      height="60px"
+      width="60px"
+    />
+  </div>
+  <div class="fr-col-3 fr-pl-1w fr-pt-5w">
+    <h1> {{title|trans}}</h1>
+  </div>
+  <div class="fr-col-2 fr-pl-1w fr-pt-5w">
+  {{form_widget(form.month)}}
+  </div>
+  <div class="fr-col-2 fr-pl-1w fr-pt-5w">
+  {{form_widget(form.service)}}
+  </div>
+  <div class="fr-col-4 fr-pl-2w fr-pt-5w">
+    &nbsp;
+    <a href="#" class="fr-btn calendar-import-btn" id="calendar-import-btn">
+        <i class="ri-download-line"></i> &nbsp;  Importer depuis Cassiopée
+    </a>
+  </div>
+</div>
+{{ form_end(form) }}
+<div class="fr-pt-2w"></div>
+
+<div class="fr-grid-row">
+    <div id="message-container" class="fr-col-12 fr-px-2w">
+        <div class="importation-ksp">
+            <i id="icon-info" class="info-blue-icon">&emsp;&nbsp;</i>&ensp;
+            <span id="importation-message" class="importation-message">
+              ...
+            </span>
+        </div>
+    </div>
+    <!-- Calendar react-->
+    <div id="calendar-container" class="fr-col-12 fr-px-2w">
+    </div>
+
+    <!-- Modal react-->
+    <div id="calendar-modal" class="fr-col-12 fr-px-2w">
+    </div>
+</div>
+{% endblock %}

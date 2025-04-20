@@ -1,0 +1,199 @@
+{#
+  MIT License
+
+  Copyright (c) 2025 [Mistral pénal]
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+#}
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}{{'security.login.title'|trans}}{% endblock %}
+
+{% block body %}
+{{form_start(loginForm)}}
+
+<main class="fr-pt-md-14v" role="main" id="content">
+  <div class="fr-container fr-container--fluid fr-mb-md-14v">
+      <div class="fr-grid-row fr-grid-row-gutters fr-grid-row--center">
+          <div class="fr-col-12 fr-col-md-8 fr-col-lg-6">
+              <div class="fr-container fr-background-grey fr-px-md-0 fr-py-10v fr-py-md-14v">
+                  <div class="fr-grid-row fr-grid-row-gutters fr-grid-row--center">
+                      <div class="fr-col-12 fr-col-md-9 fr-col-lg-8">
+                        <h1>{{'security.login.title'|trans}}</h1>
+                        {% if error %}
+                        <div class="fr-alert fr-alert--error">
+                          <h3 class="fr-alert__title">{{ 'login.error'|trans }}</h3>
+                          <p>{{ error.message }}</p>
+                        </div>
+                        {% endif %}
+                          <div>
+                              <form id="login-1760">
+                                  <fieldset class="fr-fieldset" id="login-1760-fieldset" aria-labelledby="login-1760-fieldset-legend login-1760-fieldset-messages">
+                                      <legend class="fr-fieldset__legend" id="login-1760-fieldset-legend">
+                                          <h2>Se connecter avec son compte</h2>
+                                      </legend>
+                                      <div class="fr-fieldset__element">
+                                          <fieldset class="fr-fieldset" id="credentials" aria-labelledby="credentials-messages">
+                                              <div class="fr-fieldset__element">
+                                                  <span class="fr-hint-text">Sauf mention contraire, tous les champs sont obligatoires.</span>
+                                              </div>
+                                              <div class="fr-fieldset__element">
+                                                  <div class="fr-input-group">
+                                                      <label class="fr-label" for="username-1757">
+                                                          Identifiant *
+                                                          <span class="fr-hint-text">Format attendu : prenom.nom</span>
+                                                      </label>
+                                                      {{form_widget(loginForm.username)}}
+                                                      <div class="fr-messages-group" id="username-1757-messages" aria-live="assertive">
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="fr-fieldset__element">
+                                                  <div class="fr-password" id="password-1758">
+                                                      <label class="fr-label" for="password-1758-input">
+                                                          Mot de passe *
+                                                      </label>
+                                                      <div class="fr-input-wrap">
+                                                        {{form_widget(loginForm.password)}}
+                                                      </div>
+                                                      <div class="fr-messages-group" id="password-1758-input-messages" aria-live="assertive">
+                                                      </div>
+                                                      <div class="fr-password__checkbox fr-checkbox-group fr-checkbox-group--sm">
+                                                          <input aria-label="Afficher le mot de passe" id="password-1758-show" type="checkbox" aria-describedby="password-1758-show-messages">
+                                                          <label class="fr-password__checkbox fr-label" for="password-1758-show">
+                                                              Afficher
+                                                          </label>
+                                                          <div class="fr-messages-group" id="password-1758-show-messages" aria-live="assertive">
+                                                          </div>
+                                                      </div>
+                                                      <p>
+                                                          <a href="[À MODIFIER - url de la page de récupération]" class="fr-link">Mot de passe oublié ?</a>
+                                                      </p>
+                                                  </div>
+                                              </div>
+                                              <div class="fr-messages-group" id="credentials-messages" aria-live="assertive">
+                                              </div>
+                                          </fieldset>
+                                      </div>
+                                      <div class="fr-fieldset__element">
+                                          <div class="fr-checkbox-group fr-checkbox-group--sm">
+                                              <input name="remember" id="remember-1759" type="checkbox" aria-describedby="remember-1759-messages">
+                                              <label class="fr-label" for="remember-1759">
+                                                  Se souvenir de moi
+                                              </label>
+                                              <div class="fr-messages-group" id="remember-1759-messages" aria-live="assertive">
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="fr-fieldset__element">
+                                          <ul class="fr-btns-group">
+                                              <li>
+                                                  <button class="fr-mt-2v fr-btn">
+                                                      Se connecter
+                                                  </button>
+                                              </li>
+                                          </ul>
+                                      </div>
+                                      <div class="fr-messages-group" id="login-1760-fieldset-messages" aria-live="assertive">
+                                      </div>
+                                  </fieldset>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</main>
+{{form_end(loginForm, {render_rest: false})}}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('login') }}
+{% endblock %}
+
+
+{# 
+
+<main role="main">
+  <div class="fr-container fr-container--fluid">
+    <div class="fr-grid-row fr-grid-row-gutters fr-grid-row--center">
+      <div class="fr-col-12">
+        <div class="fr-container fr-background-alt--grey">
+          <div class="fr-grid-row fr-grid-row-gutters fr-grid-row--center">
+            <div class="fr-col-12">
+              <h1>{{'security.login.title'|trans}}</h1>
+              {% if error %}
+              <div class="fr-alert fr-alert--error">
+                <h3 class="fr-alert__title">{{ 'login.error'|trans }}</h3>
+                <p>{{ error.message }}</p>
+              </div>
+              {% endif %}
+              <div>
+                <fieldset class="fr-fieldset">
+                  <div class="fr-fieldset__element">
+                    <fieldset class="fr-fieldset">
+                      <div class="fr-fieldset__element">
+                        <div class="fr-input-group">
+                          {{form_row(loginForm.username)}}
+                        </div>
+                      </div>
+                      <div class="fr-fieldset__element">
+                        <div class="fr-password">
+                          {{form_row(loginForm.password)}}
+                          <div class="fr-password__checkbox fr-checkbox-group fr-checkbox-group--sm">
+                            {{form_widget(loginForm.passwordCheckbox)}}
+                            {{form_label(loginForm.passwordCheckbox)}}
+                          </div>
+                          <a href="" class="fr-link">{{'login.password_lost'|trans}}</a>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="fr-fieldset__element">
+                    <div class="fr-checkbox-group fr-checkbox-group--sm">
+                      {{form_widget(loginForm.rememberMe)}}
+                      {{form_label(loginForm.rememberMe)}}
+                    </div>
+                  </div>
+                  <div class="fr-fieldset__element">
+                    <ul class="fr-btns-group">
+                      <li>{{form_row(loginForm.submit)}}</li>
+                    </ul>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{{form_end(loginForm)}}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('login') }}
+{% endblock %} #}

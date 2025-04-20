@@ -1,0 +1,44 @@
+{
+    "devDependencies": {
+        "@babel/core": "^7.17.0",
+        "@babel/preset-env": "^7.16.0",
+        "@babel/preset-react": "^7.0.0",
+        "@hotwired/stimulus": "^3.0.0",
+        "@pugx/autocompleter-bundle": "file:vendor/pugx/autocompleter-bundle/assets",
+        "@symfony/stimulus-bridge": "^3.2.0",
+        "@symfony/webpack-encore": "^4.0.0",
+        "core-js": "^3.23.0",
+        "fos-router": "./vendor/friendsofsymfony/jsrouting-bundle/Resources/",
+        "regenerator-runtime": "^0.13.9",
+        "webpack": "^5.74.0",
+        "webpack-cli": "^4.10.0",
+        "webpack-notifier": "^1.15.0"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
+    },
+    "dependencies": {
+        "@gouvfr/dsfr": "^1.11.0",
+        "bazinga-translator": "^5.0.0",
+        "ckeditor4": "4.22.1",
+        "dexie": "^3.2.4",
+        "dexie-encrypted": "^2.0.0",
+        "dotenv-webpack": "^8.0.1",
+        "immutability-helper": "^3.1.1",
+        "jquery-ui": "^1.13.2",
+        "lz-string": "^1.5.0",
+        "moment": "^2.29.4",
+        "react": "^18.2.0",
+        "react-dnd": "^16.0.1",
+        "react-dnd-html5-backend": "^16.0.1",
+        "react-dom": "^18.2.0",
+        "remixicon": "^3.3.0",
+        "tslib": "^2.6.2",
+        "webpack-jquery-ui": "^2.0.1"
+    }
+}

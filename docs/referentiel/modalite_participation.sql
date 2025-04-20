@@ -1,0 +1,5 @@
+INSERT INTO webapp.modalite_participation(id, code, libelle, mnemo)VALUES(nextval('webapp.modalite_participation_id_seq'), '1', 'tentative','') ON CONFLICT DO NOTHING;
+INSERT INTO webapp.modalite_participation(id, code, libelle, mnemo)VALUES(nextval('webapp.modalite_participation_id_seq'), '10', 'complicité de tentative','') ON CONFLICT DO NOTHING;
+INSERT INTO webapp.modalite_participation(id, code, libelle, mnemo)VALUES(nextval('webapp.modalite_participation_id_seq'), '2', 'complicité','') ON CONFLICT DO NOTHING;
+INSERT INTO webapp.modalite_participation(id, code, libelle, mnemo)VALUES(nextval('webapp.modalite_participation_id_seq'), '3', 'récidive','') ON CONFLICT DO NOTHING;
+INSERT INTO webapp.modalite_participation(id, code, libelle, mnemo)VALUES(nextval('webapp.modalite_participation_id_seq'), '11', 'tentative en récidive','') ON CONFLICT DO NOTHING;

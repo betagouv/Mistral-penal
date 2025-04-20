@@ -1,0 +1,139 @@
+{
+    "type": "project",
+    "license": "proprietary",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.3.0",
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "api-platform/core": "^4.0",
+        "doctrine/dbal": "^3",
+        "doctrine/doctrine-bundle": "^2.13",
+        "doctrine/doctrine-migrations-bundle": "^3.3",
+        "doctrine/orm": "^2.20",
+        "friendsofsymfony/ckeditor-bundle": "*",
+        "friendsofsymfony/jsrouting-bundle": "^3.2",
+        "knplabs/knp-paginator-bundle": "^6.6",
+        "nelmio/cors-bundle": "^2.3",
+        "paragonie/halite": "^5.1",
+        "phpdocumentor/reflection-docblock": "^5.3",
+        "phpstan/phpdoc-parser": "^1.21",
+        "pugx/autocompleter-bundle": "^1.9",
+        "stomp-php/stomp-php": "^5.1",
+        "symfony/asset": "7.2.*",
+        "symfony/browser-kit": "7.2.*",
+        "symfony/console": "7.2.*",
+        "symfony/css-selector": "7.2.*",
+        "symfony/doctrine-messenger": "7.2.*",
+        "symfony/dotenv": "7.2.*",
+        "symfony/expression-language": "7.2.*",
+        "symfony/flex": "^1.17|^2",
+        "symfony/form": "7.2.*",
+        "symfony/framework-bundle": "7.2.*",
+        "symfony/http-client": "7.2.*",
+        "symfony/intl": "7.2.*",
+        "symfony/mailer": "7.2.*",
+        "symfony/messenger": "7.2.*",
+        "symfony/mime": "7.2.*",
+        "symfony/monolog-bundle": "^3.10",
+        "symfony/notifier": "7.2.*",
+        "symfony/process": "7.2.*",
+        "symfony/property-access": "7.2.*",
+        "symfony/property-info": "7.2.*",
+        "symfony/runtime": "7.2.*",
+        "symfony/security-bundle": "7.2.*",
+        "symfony/serializer": "7.2.*",
+        "symfony/string": "7.2.*",
+        "symfony/translation": "7.2.*",
+        "symfony/twig-bundle": "7.2.*",
+        "symfony/validator": "7.2.*",
+        "symfony/web-link": "7.2.*",
+        "symfony/webpack-encore-bundle": "^2.2",
+        "symfony/yaml": "7.2.*",
+        "twig/extra-bundle": "^2.12|^3.0",
+        "twig/intl-extra": "^3.6",
+        "twig/twig": "^2.12|^3.0",
+        "willdurand/js-translation-bundle": "^6.1"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "php-http/discovery": true,
+            "symfony/flex": true,
+            "symfony/runtime": true
+        },
+        "optimize-autoloader": true,
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        }
+    },
+    "replace": {
+        "symfony/polyfill-ctype": "*",
+        "symfony/polyfill-iconv": "*",
+        "symfony/polyfill-php72": "*"
+    },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        },
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ],
+        "reset-base": [
+            "php bin/console d:s:d --force",
+            "php bin/console d:s:u --force",
+            "y | php bin/console d:m:migrate",
+            "php -d memory_limit=-1 bin/console c:c --no-warmup",
+            "php -d memory_limit=-1 bin/console cache:warmup"
+        ]
+    },
+    "conflict": {
+        "symfony/symfony": "*"
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "7.2.*"
+        }
+    },
+    "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.6",
+        "liip/test-fixtures-bundle": "^3.0.0",
+        "phpunit/phpunit": "^9.5",
+        "psy/psysh": "@stable",
+        "symfony/browser-kit": "7.2.*",
+        "symfony/css-selector": "7.2.*",
+        "symfony/debug-bundle": "7.2.*",
+        "symfony/maker-bundle": "^1.0",
+        "symfony/phpunit-bridge": "^6.2",
+        "symfony/stopwatch": "7.2.*",
+        "symfony/web-profiler-bundle": "7.2.*"
+    },
+    "repositories": [
+      {
+            "type":"composer",
+            "url":"https://nexus.codeo.intranet.justice.gouv.fr/repository/composer-proxy/",
+            "options":{
+                "ssl":{
+                    "verify_peer": false
+                }
+            }
+      }
+    ]
+}

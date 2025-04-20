@@ -1,0 +1,81 @@
+{#
+  MIT License
+
+  Copyright (c) 2025 [Mistral pénal]
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+#}
+
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="fr-table fr-table--bordered">
+  <table>
+    <caption>{{'import.calendar.title'|trans}}</caption>
+    <thead>
+      <tr>
+        <th scope="col">{{'import.calendar.field.year'|trans}}</th>
+        {% for i in 1..12 %}
+        <th scope="col">{{month_plaintext(i)}}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% set h = 0 %}
+      {% for j in minYear..maxYear %}
+      <tr>
+        <td>{{j}}</td>
+        {% for i in 1..12 %}
+        <td>
+          {% if items[h]['maj'] %}
+          <div class="fr-card">
+            <div class="fr-card__body">
+              <div class="fr-card__content">
+                <p class="fr-card__desc">
+                {{items[h]['cpt']?:'-'}} {{'audience.number_by_month'|trans}} du {{items[h]['min_date']|toDate|dateSmall}} au {{items[h]['max_date']|toDate|dateSmall}}
+                <a href="{{ path('app_import_audience',{'month': i, 'year': j})}}" class="fr-btn hide-on-import">{{'import.affaire.title'|trans}}</a>
+                </p>
+                <p class="fr-badge fr-badge--green-emeraude">
+                maj: {{items[h]['maj']?items[h]['maj']|toDate|dateSmall:''}}
+                </p>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          <p>
+            <button type="button" onClick="javascript:updateGlobal({{j}},{{i}});" class="fr-btn hide-on-import" title="{{'globals.btn.import'|trans}}">
+              <i class="ri-arrow-left-right-line"></i>
+            </button>
+          </p>
+          {% set h = h+1 %}
+        </td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('import_calendar') }}
+{% endblock %}

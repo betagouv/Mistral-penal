@@ -1,0 +1,184 @@
+{#
+  MIT License
+
+  Copyright (c) 2025 [Mistral pénal]
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+#}
+
+
+{% macro addVictime(formAffairePersonne, formAffaire, index0, typePersonne) %}
+  {% set affaireId = formAffaire.vars.value.id %}
+    <section class="fr-accordion victime-section">
+        <h3 class="fr-accordion__title">
+            {% set expanded = "true" %}
+            {% set idVictime = "__name__" %}
+            {% set rand2 = "__rand__" %}
+            {% if formAffairePersonne.vars.data is not null %}
+                {% set idVictime = formAffairePersonne.vars.data.id %}
+                {% set rand2 = random() %}
+                {% set expanded = "false" %}
+            {% endif %}
+            <button
+              class="fr-accordion__btn affaire-personne"
+              data-origin="{% if formAffairePersonne.vars.data is not null %}{{formAffairePersonne.vars.data.personne.nomComplet}} ({{formAffairePersonne.vars.data.statut.libelle}}){% endif %}"
+              data-statut="{% if formAffairePersonne.vars.data is not null %}{{formAffairePersonne.vars.data.statut.libelle}}{% endif %}"
+              data-type="victime"
+              data-affaire-id="{{affaireId}}"
+              data-personne-id="{{idVictime}}"
+              aria-expanded="{{expanded}}"
+              aria-controls="accordion-{{ rand2 }}"
+            >
+            {% if formAffairePersonne.vars.data is not null %}{{formAffairePersonne.vars.data.personne.nomComplet}} ({{formAffairePersonne.vars.data.statut.libelle}}){% endif %}
+            </button>
+        </h3>
+        <div class="fr-collapse" id="accordion-{{ rand2 }}">
+            <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--left">
+                {% include
+                    'affaire/_details_personne.html.twig'
+                    with {
+                        'formAffairePersonne': formAffairePersonne,
+                        'formAffaire': formAffaire,
+                        'index': index0,
+                        'typePersonne' : typePersonne,
+                        'rand2' : rand2,
+                        'type': 'victime'
+                    }
+                %}
+            </div>
+            <div class="fr-grid-row fr-grid-row--right">
+                <div class="fr-mt-2w">
+                    {% if not (
+                      (formAffairePersonne.vars.data is not null)and(formAffairePersonne.vars.data.personne.idKsp)
+                      )
+                    %}
+                    <button
+                        type="button"
+                        onclick="javascript:deleteVictime({{idVictime}},{{rand2}});"
+                        class="fr-btn fr-btn--tertiary btn-orange"
+                    >
+                        <i class="ri-delete-bin-6-fill fr-pr-1w"></i> {{'affaire.btn.del_victime'|trans}}
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endmacro %}
+
+{% import _self as formMacros %}
+
+{{ form_start(formAffaire) }}
+{{ form_row(formAffaire.numeroParquet)}}
+<div class="fr-grid-row">
+    <div class="fr-col-12" style="color:red">
+        {{ errors }}
+    </div>
+</div>
+{# INTERVENANTS #}
+<input type="hidden" value={{formAffaire.vars.data.id}} id="affaire_id"/>
+<h2 class="fr-accordion__title affaire-block">{{'affaire.display.composition'|trans}}</h2>
+<div class="fr-grid-row audience-intervenants">
+    <div class="fr-col-2">
+        <b>{{form_label(formAffaire.president)}}</b>
+    </div>
+    <div class="fr-col-4 fr-pl-1w">{{form_widget(formAffaire.president)}}</div>
+    <div class="fr-col-2 fr-pl-1w">
+        <b>{{form_label(formAffaire.ministerePublic)}}</b>
+    </div>
+    <div class="fr-col-4 fr-pl-1w">{{form_widget(formAffaire.ministerePublic)}}</div>
+    <div class="fr-col-12 fr-mt-1w"></div>
+    <div class="fr-col-2">
+        <b>{{form_label(formAffaire.assesseur1)}}</b>
+    </div>
+    <div class="fr-col-4 fr-pl-1w">{{form_widget(formAffaire.assesseur1)}}</div>
+    <div class="fr-col-2 fr-pl-1w">
+        <b>{{form_label(formAffaire.assesseur2)}}</b>
+    </div>
+    <div class="fr-col-4 fr-pl-1w">{{form_widget(formAffaire.assesseur2)}}</div>
+    <div class="fr-col-12 fr-mt-1w"></div>
+    <div class="fr-col-2">
+        <b>{{form_label(formAffaire.greffier)}}</b>
+    </div>
+    <div class="fr-col-4 fr-pl-1w">{{form_widget(formAffaire.greffier)}}</div>
+</div>
+{# PREVENU(es) #}
+{% set rand1 = random() %}
+{% set typePersonne = "prevenue" %}
+<h2 class="fr-accordion__title affaire-block">{{'affaire.display.prevenus'|trans}}</h2>
+<div class="fr-accordions-group">
+    {% set affaireId = formAffaire.vars.value.id %}
+    {% for formPrevenu in formAffaire.prevenus %}
+
+    <section class="fr-accordion">
+    <h3 class="fr-accordion__title">
+        <button
+          class="fr-accordion__btn affaire-personne"
+          data-rl=""
+          data-origin="{{formPrevenu.vars.data.personne.nomComplet}}"
+          data-type="prevenu"
+          data-affaire-id="{{affaireId}}"
+          data-personne-id="{{formPrevenu.vars.data.id}}"
+          aria-expanded="{% if loop.index == 1 %}true{% else %}false{% endif %}"
+          aria-controls="accordion-{{ rand1 + loop.index }}">
+        {{formPrevenu.vars.data.personne.nomComplet}}
+        </button>
+    </h3>
+    <div class="fr-collapse" id="accordion-{{ rand1 + loop.index }}">
+        <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--left">
+            {% include 'affaire/_details_personne.html.twig' with {'formAffaire': formAffaire, 'formAffairePersonne': formPrevenu, "typePersonne" : typePersonne} %}
+        </div>
+    </div>
+    </section>
+    {% endfor %}
+</div>
+{# VICTIMES #}
+{% set rand2 = random() %}
+{% set typePersonne = "victime" %}
+<h2 class="fr-accordion__title affaire-block">{{'affaire.display.victimes'|trans}}</h2>
+<div class="fr-accordions-group">
+    <div id="victime-group">
+    {% for formVictime in formAffaire.victimes %}
+        {{ formMacros.addVictime(formVictime, formAffaire, loop.index0, typePersonne) }}
+    {% endfor %}
+    </div>
+    <div class="fr-grid-row">
+    <div class="fr-col-4">
+        <br/>
+        <button
+            type="button"
+            onclick="javascript:addVictime(this);"
+            class="fr-btn fr-btn--tertiary fr-btn-mistral"
+            data-prototype="{{ formMacros.addVictime(formAffaire.victimes.vars.prototype, formAffaire, null)|e('html_attr') }}"
+        >
+            <i class="ri-add-line"></i> {{'affaire.btn.add_victime'|trans}}
+        </button>
+    </div>
+  </div>
+  {# SOUMISSION DU FORMULAIRE #}
+  <div class="fr-grid-row">
+    <div class="fr-col-4">
+      <br/>
+      <button type="submit" onclick="javascript:backupAffaire();" id="affaire_submit" name="affaire[submit]" class="fr-btn">{{'globals.btn.save_alternative'|trans}}</button>
+    </div>
+  </div>
+</div>
+
+{# {{ form_rest(formAffaire)}} #}
+{{ form_end(formAffaire, {render_rest: false}) }}

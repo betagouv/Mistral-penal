@@ -1,0 +1,85 @@
+{#
+  MIT License
+
+  Copyright (c) 2025 [Mistral pénal]
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+#}
+
+
+{% set diff = make_diff_affaire_natinf(affaireNatinf) %}
+{% set personneId = personneId is defined ? personneId : 0 %}
+{% set natinfPersonneId = natinfPersonneId is defined ? natinfPersonneId : 0 %}
+{% set rand = rand() %}
+<div
+  id="panel-{{rand}}"
+  class="fr-grid-row fr-natinf-card"
+  data-affaire-natinf="{{affaireNatinf.id}}"
+  data-natinf-personne="{{natinfPersonneId}}"
+  data-personne="{{personneId}}"
+>
+  <div class="fr-col-11">
+    <span for="natinf" class="bold">{{diff.natinf.new}}</span>
+    <span for="disqual-requal-natinf" class="{% if (true == diff.natinf.change) %}highlight clearLeft{% endif %}">
+    {% if (true == diff.natinf.change) %}{{'affaire_natinf.display.pre_label_disqual'|trans}} {{diff.natinf.old}} {{'affaire_natinf.display.post_label_disqual'|trans}}{% endif %}
+    </span>
+    <span for="qualificationDeveloppee" class="{% if(true == diff.qd.change) %}highlight clearLeft{% endif %}">
+    {% if(true == diff.qd.change) %}QD modifiée{% endif %}
+    </span>
+    <br style=clear:left;"/>
+    <span class="fr-natinf-section" for="date">
+    {{diff.date.new}}
+    </span>
+    <span for="disqual-requal-date" class="{% if true == diff.date.change %}highlight clearLeft{% endif %}">
+    {% if true == diff.date.change %}{{'affaire_natinf.display.pre_label_disqual'|trans}} {{diff.date.old}} {{'affaire_natinf.display.post_label_disqual'|trans}}{% endif %}
+    </span>
+    <br style=clear:left;"/>
+    <span class="fr-natinf-section">
+      <b>à</b>&nbsp;<i for="commune" class="{% if diff.commune.change %}highlight{% endif %}">{{diff.commune.new}}</i><i for="lieu" class="{% if diff.lieu.change %}highlight{% endif %}"> - {{diff.lieu.new}}</i>
+    </span>
+  </div>
+  <div class="fr-col-1">
+    <table height="100%" width="100%">
+      <tr>
+        <td valign="middle">
+          <span for="annulation-btn">
+          {% if affaireNatinf.duplicateRoot %}
+          <a
+            for="panel-{{rand}}"
+            href="javascript:revertModalNatinf('panel-{{rand}}');"
+            class="fr-btn fr-btn--secondary btn-orange {% if affaireNatinf.isLocked %}hide{% endif %}"
+            title="{{'affaire_natinf.btn.revert'|trans}}"
+          >
+            <i class="ri-arrow-go-back-line"></i>
+          </a>
+          {% endif %}
+          </span>
+          <a
+            href="javascript:showModalNatinf('panel-{{rand}}');"
+            class="fr-btn {% if affaireNatinf.isLocked %}hide{% endif %}"
+            title="{{'affaire_natinf.btn.update'|trans}}"
+          >
+            <i class="ri-edit-line"></i>
+          </a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+<br style=clear:left;"/>

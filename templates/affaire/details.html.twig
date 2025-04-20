@@ -1,0 +1,98 @@
+{#
+  MIT License
+
+  Copyright (c) 2025 [Mistral pénal]
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+#}
+
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('affaire_index') }}
+{% endblock %}
+{% if affaire %}
+<div class="fr-grid-row fr-grid-row--gutters fr-grid-row--left">
+  {# Header Fiche affaire #}
+  <div class="fr-col-12 fr-pl-2w">
+    <div class="fr-grid-row">
+      <div class="fr-col-6 fr-pl-2w">
+        <h2>
+          {{'affaire.display.identifiant_justice'|translate({'%identifiant_justice%': affaire.numeroDossier})}} &ensp;
+          <span class="fr-tag">{{(affaire.scelle == true) ? 'affaire.display.avec_scelle'|trans : 'affaire.display.sans_scelle'|trans}}</span>
+        </h2>
+      </div>
+      <div class="fr-col-2">
+      </div>
+      <div class="fr-col-4">
+        <a href="{{path('app_note_audience_export', {'id': affaire.id})}}" target="_blank" class="fr-btn button-export">
+        {{'audience.btn.export_note_audience'|trans}}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  {# Tabulations Informations/Déroulements débats/Décision #}
+  <div class="fr-col-12">
+    <div class="fr-tabs">
+      <ul class="fr-tabs__list" role="tablist" aria-label="[A modifier | nom du système d'onglet]">
+        <li role="presentation">
+          <button id="tabpanel-404" class="fr-tabs__tab  fr-tabs__tab--icon-left" tabindex="0" role="tab" aria-selected="true" aria-controls="tabpanel-404-panel">{{'affaire.panel.informations'|trans}}</button>
+        </li>
+        <li role="presentation">
+          <button id="tabpanel-405" class="fr-tabs__tab  fr-tabs__tab--icon-left" tabindex="-1" role="tab" aria-selected="false" aria-controls="tabpanel-405-panel">{{'affaire.panel.deroulement_debat'|trans}}</button>
+        </li>
+        <li role="presentation">
+          <button id="tabpanel-406" class="fr-tabs__tab fr-tabs__tab--icon-left" tabindex="-1" role="tab" aria-selected="false" aria-controls="tabpanel-406-panel">{{'affaire.panel.decision'|trans}}</button>
+        </li>
+      </ul>
+
+      <div id="tabpanel-404-panel" class="fr-tabs__panel fr-tabs__panel--selected" role="tabpanel" aria-labelledby="tabpanel-404" tabindex="0">
+          {% include 'affaire/_details_informations.html.twig' with {'formAffaire': form} %}
+      </div>
+
+      <div id="tabpanel-405-panel" class="fr-tabs__panel" role="tabpanel" aria-labelledby="tabpanel-405" tabindex="0">
+          {% include 'affaire/_note_audience.html.twig' with {'form': formNoteAudience} %}
+
+      </div>
+
+      <div id="tabpanel-406-panel" class="fr-tabs__panel" role="tabpanel" aria-labelledby="tabpanel-406" tabindex="0">
+          <p>
+            {% include 'affaire/_renvoi.html.twig' with {'formRenvoi': formRenvoi, 'affaire' : affaire} %}
+          </p>
+          <p>
+            {% include 'affaire/_decision.html.twig' with {'formDecision': formDecision, 'affaire' : affaire} %}
+          </p>
+      </div>
+
+      <div class="auto-record-status" style="display:none">
+        <p class="fr-badge fr-badge--new fr-badge auto-record-badge-new">ENREGISTREMENT EN COURS</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- zone modale -->
+<!-- déclencheur de modale modification natinf -->
+{% include 'affaire/_modale_requal_disqual_natinf.html.twig' %}
+<!-- déclencheur de la modale représentant légaux -->
+{% include 'affaire/_modale_representant_legal.html.twig' %}
+<!-- déclencheur de la modale avocat -->
+{% include 'affaire/_modale_avocat.html.twig' %}
+<!-- /zone modale -->
+{% endif %}

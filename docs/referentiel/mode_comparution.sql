@@ -1,0 +1,5 @@
+INSERT INTO webapp.mode_comparution(id, code, libelle, mnemo)VALUES(nextval('webapp.mode_comparution_id_seq'), 'CMP', 'Comparant','') ON CONFLICT DO NOTHING;
+INSERT INTO webapp.mode_comparution(id, code, libelle, mnemo)VALUES(nextval('webapp.mode_comparution_id_seq'), 'CMPAM', 'Comparant assisté','') ON CONFLICT DO NOTHING;
+INSERT INTO webapp.mode_comparution(id, code, libelle, mnemo)VALUES(nextval('webapp.mode_comparution_id_seq'), 'NCMP', 'Non comparant','') ON CONFLICT DO NOTHING;
+INSERT INTO webapp.mode_comparution(id, code, libelle, mnemo)VALUES(nextval('webapp.mode_comparution_id_seq'), 'NCMPSM', 'Non comparant représenté sans mandat','') ON CONFLICT DO NOTHING;
+INSERT INTO webapp.mode_comparution(id, code, libelle, mnemo)VALUES(nextval('webapp.mode_comparution_id_seq'), 'NCMPAM', 'Non comparant représenté avec mandat','') ON CONFLICT DO NOTHING;

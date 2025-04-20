@@ -1,0 +1,60 @@
+{#
+  MIT License
+
+  Copyright (c) 2025 [Mistral pénal]
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+#}
+
+{# CONVOCATION #}
+<div class="fr-grid-row">
+    <div class="fr-col-12 fr-mt-10w"></div>
+    <div class="fr-col-2">{{form_label(formAffairePersonne.modeConvocation)}}</div>
+    <div class="fr-col-4">{{form_widget(formAffairePersonne.modeConvocation)}}</div>
+    <div class="fr-col-2 fr-pl-1w">{{form_label(formAffairePersonne.assisteDe)}}</div>
+    <div class="fr-col-4">{{form_widget(formAffairePersonne.assisteDe)}}</div>
+    <div class="fr-col-12 fr-mt-1w"></div>
+    <div class="fr-col-2">{{form_label(formAffairePersonne.dateConvocation)}}</div>
+    <div class="fr-col-3">{{form_widget(formAffairePersonne.dateConvocation)}}</div>
+    <div class="fr-col-1"></div>
+    <div class="fr-col-2">{{ form_label(formAffairePersonne.avocat) }}</div>
+    <div class="fr-col-4">{{ form_widget(formAffairePersonne.avocat) }}</div>
+    <div class="fr-col-12 fr-mt-1w"></div>
+    <div class="fr-col-2">{{ form_label(formAffairePersonne.modeComparution) }}</div>
+    <div class="fr-col-4">{{ form_widget(formAffairePersonne.modeComparution) }}</div>
+    <div class="fr-col-6"></div>
+    <div class="fr-col-12 fr-mt-1w"></div>
+
+    <div class="fr-col-3">{{ form_label(formAffairePersonne.natureJugement) }}</div>
+    <div class="fr-col-5">
+    <fieldset class="fr-fieldset" id="radio-inline" aria-labelledby="radio-inline-legend radio-inline-messages">
+    {{ form_widget(formAffairePersonne.natureJugement) }}
+    </fieldset>
+    </div>
+    <div class="fr-col-4"></div>
+    <div class="fr-col-12 fr-mt-1w"></div>
+
+    {# Visio #}
+    <div class="fr-col-2">{{ form_widget(formAffairePersonne.isVisio) }}</div>
+    <div class="fr-col-1 fr-pl-2w fr-pt-1v">{{ form_label(formAffairePersonne.debutVisio) }}</div>
+    <div class="fr-col-2 fr-pl-2w fr-pr-1w">{{ form_widget(formAffairePersonne.debutVisio) }}</div>
+    <div class="fr-col-1 fr-pl-2w fr-pt-1v">{{ form_label(formAffairePersonne.finVisio) }}</div>
+    <div class="fr-col-2 fr-pl-2w fr-pr-1w">{{ form_widget(formAffairePersonne.finVisio) }}</div>
+    <div class="fr-col-4"></div>
+</div>

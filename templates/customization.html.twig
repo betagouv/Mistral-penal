@@ -1,0 +1,140 @@
+{#
+  MIT License
+
+  Copyright (c) 2025 [Mistral pénal]
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+#}
+
+
+{% block form_label %}
+    {%- if form.vars.label -%}
+        <label class="{{form.vars.label_attr.class??[]|join(" ")}} form-label" for="{{form.vars.id}}">
+    {{(form.vars.label ?? form.vars.name)|trans}}
+    {% if form.vars.required == true %}*{% endif %}
+    {{form_help(form)}}
+    {% endif %}
+</label>
+{% endblock form_label %}
+
+{% block choice_widget_expanded %}
+<fieldset class="fr-fieldset" id="radio-inline" aria-labelledby="radio-inline-legend radio-inline-messages">
+  {% for child in form %}
+  <div class="fr-fieldset__element fr-fieldset__element--inline">
+    <div class="fr-radio-group">
+    {% if 'placeholder' in child.vars.id %}
+    {% else %}
+      {{ form_widget(child, {'attr': {'class': 'fr-fieldset-autosave'}}) }}
+      {{ form_label(child) }}
+    {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</fieldset>
+{% endblock choice_widget_expanded %}
+
+{% block autocomplete_widget %}
+<div class="fr-autocomplete-area">
+  <div style="float:left;width:100%;">
+  {{ block('form_widget_simple') }}
+  </div>
+  <div class="load load-autocomplete hide"></div>
+  <div class="remove-autocomplete"><i class='ri-close-circle-fill'></i></div>
+</div>
+{% endblock %}
+
+{% block rich_checkbox_widget %}
+  <div style="margin: -8px 8px 0 0">
+    <div class="fr-toggle fr-toggle--label-left">
+      <input
+        {{ form.vars.value == "1" ? 'checked=true' : ''}}
+        type="checkbox"
+        class="fr-toggle__input fr-fieldset-autosave {{form.localCheckbox.vars.label|replace({'.': '_'})}}"
+        id="{{form.localCheckbox.vars.id}}"
+        name="{{form.localCheckbox.vars.full_name}}"
+        {{ block('attributes') }}>
+      <label class="fr-toggle__label form-label-rich-checkbox" for="{{form.localCheckbox.vars.id}}">{{form.localCheckbox.vars.label|trans}}</label>
+    </div>
+  </div>
+{% endblock rich_checkbox_widget %}
+
+{% block _renvoi_checkbox_widget %}
+  <fieldset class="fr-fieldset fr-mt-1w dropdown" id="checkboxes" aria-labelledby="checkboxes-legend checkboxes-messages">
+      {%- for child in form -%}
+      <div class="fr-fieldset__element dropdown">
+          {{- form_widget(child, {'attr':{'class':'dropdown'}}) -}}
+          <label class="fr-pl-2w dropdown" for="checkboxes-{{ child.vars.id }}">{{child.vars.label|raw}}</label>
+        </div>
+      {%- endfor -%}
+  </fieldset>
+{% endblock %}
+
+{% block _dsfr_checkbox_widget %}
+  {# <fieldset class="fr-fieldset fr-mt-1w dropdown" id="checkboxes" aria-labelledby="checkboxes-legend checkboxes-messages"> #}
+      {%- for child in form -%}
+      <div class="fr-fieldset__element" id="fieldset_{{ child.vars.id }}">
+        <div class="fr-checkbox-group dropdown fr-checkbox-group--sm fr-pl-2w">
+            {{- form_widget(child, {'attr':{'class':'dropdown'}}) -}}
+            <label class="fr-label fr-pl-2w dropdown" for="{{ child.vars.id }}">
+              {{child.vars.label|raw}}
+            </label>
+        </div>
+      </div>
+      {%- endfor -%}
+  {# </fieldset> #}
+{% endblock %}
+
+{% block _affaire_hidden_widget %}
+    {% set type = 'hidden' %}
+    {{ block('form_widget_simple') }}
+{% endblock %}
+
+{% block form_help %}
+  {%- if form.vars.help -%}
+  <span class="fr-hint-text">{{form.vars.help|trans}}</span>
+  {%- endif -%}
+{% endblock form_help %}
+
+{%- block widget_attributes -%}
+    id="{{ id }}" name="{{ full_name }}"
+    {%- if disabled %} disabled="disabled"{% endif -%}
+    {%- if required %} required="required"{% endif -%}
+    {{ block('attributes') }}
+{%- endblock widget_attributes -%}
+
+{%- block form_widget_simple -%}
+    {%- set type = type|default('text') -%}
+    {%- if type == 'range' or type == 'color' -%}
+        {# Attribute "required" is not supported #}
+        {%- set required = false -%}
+    {%- endif -%}
+    <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+{%- endblock form_widget_simple -%}
+
+{%- block form_row -%}
+    {%- set widget_attr = form.vars.attr -%}
+    {%- if help is not empty -%}
+        {%- set widget_attr = {attr: {'aria-describedby': id ~"_help", 'class':'fr-input'}} -%}
+    {%- endif -%}
+    <div{% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
+        {{- form_label(form, {'attr': {'class': 'fr-label'}} ) -}}
+        {{- form_errors(form) -}}
+        {{- form_widget(form, widget_attr) -}}
+    </div>
+{%- endblock form_row -%}

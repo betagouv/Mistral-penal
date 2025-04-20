@@ -1,0 +1,139 @@
+{#
+  MIT License
+
+  Copyright (c) 2025 [Mistral pénal]
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+#}
+
+{# RENVOIS #}
+{# <p class="affaire-section">Renvoi(s)</p> #}
+
+<div class="fr-grid-row">
+    <div id="renvois-container" class="fr-col-12"></div>
+</div>
+
+{# MODAL #}
+<dialog aria-labelledby="fr-modal-renvoi-title" id="fr-modal-renvoi" class="fr-modal" role="dialog" >
+    <div class="fr-container fr-container--fluid fr-container-md">
+        <div class="fr-grid-row fr-grid-row--center">
+
+            <div class="fr-col-12 fr-col-md-8 fr-col-lg-6">
+                <div class="fr-modal__body">
+                    <div class="fr-modal__header">
+                        <span class="renvoi-modal-title">Renvoi</span>
+                        <button class="fr-btn--close fr-btn" title="Fermer la fenêtre modale" aria-controls="fr-modal-renvoi">Annuler</button>
+                    </div>
+                    <div class="fr-modal__content">
+                        <div class="fr-grid-row">
+                            <div class="fr-col-12 renvoi-border fr-mb-2w">
+                                {{ form_start(formRenvoi) }}
+                                {{ form_widget(formRenvoi.affaire) }}
+                            </div>
+                        </div>
+
+                        <div class="fr-grid-row">
+                            <div class="fr-col-4">
+                                {{ form_label(formRenvoi.renvoiMotif) }}
+                            </div>
+                            <div class="fr-col-8">
+                                {{ form_widget(formRenvoi.renvoiMotif) }}
+                            </div>
+                            <div class="fr-col-12 fr-mb-1w"></div>
+                        </div>
+
+                        <div class="fr-grid-row">
+                            <div class="fr-col-4">
+                                {{ form_label(formRenvoi.date) }}
+                            </div>
+                            <div class="fr-col-8">
+                                {{ form_widget(formRenvoi.date) }}
+                            </div>
+                            <div class="fr-col-12 fr-mb-1w"></div>
+                        </div>
+
+                        <div class="fr-grid-row">
+                            <div class="fr-col-4">
+                                {{ form_label(formRenvoi.mesureSurete) }}
+                            </div>
+                            <div class="fr-col-8">
+                                {{ form_widget(formRenvoi.mesureSurete) }}
+                            </div>
+                            <div class="fr-col-12 fr-mb-1w"></div>
+                        </div>
+
+                        <div class="fr-grid-row" id="formRenvoiDetailsMesureSureteContainer" {{ not formRenvoi.mesureSurete.vars.value ? 'style="display: none"' }}>
+                            <div class="fr-col-4">
+                                {{ form_label(formRenvoi.detailsMesureSurete) }}
+                            </div>
+                            <div class="fr-col-8">
+                                {{ form_widget(formRenvoi.detailsMesureSurete) }}
+                            </div>
+                            <div class="fr-col-12 fr-mb-1w"></div>
+                        </div>
+
+                        <div class="fr-grid-row">
+                            <div class="fr-col-4">
+                                {{ form_label(formRenvoi.expertise) }}
+                            </div>
+                            <div class="fr-col-8">
+                                {{ form_widget(formRenvoi.expertise) }}
+                            </div>
+                            <div class="fr-col-12 fr-mb-1w"></div>
+
+                            <div class="fr-col-4">
+                                {# form_label(formRenvoi.affairePersonnes) #}
+                            </div>
+                            <div class="fr-col-8 fr-pt-2v">
+                                <fieldset class="fr-fieldset fr-mt-1w" id="checkboxes-renvoi-small">
+                                    <div class="fr-fieldset__element">
+                                        <div class="fr-pl-2w">
+                                            <input type="checkbox" id="checkbox-all" />
+                                            <label class="fr-pl-2w" for="checkbox-all"><b>Tous</b></label>
+                                        </div>
+                                    </div>
+
+                                    {# form_widget(formRenvoi.affairePersonnes, {'attr': {'class':'dropdown'}}) #}
+
+                                </fieldset>
+                            </div>
+                        </div>
+
+                        <div class="fr-grid-row">
+                            <div class="fr-col-9">
+                            </div>
+                            <div class="fr-col-2">
+
+                            </div>
+
+                            <div class="fr-col-12" id="renvoi_error" style="color:red">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fr-modal__footer renvoi-modal-submit">
+                            {{ form_widget(formRenvoi.submit) }}
+                            {{ form_end(formRenvoi) }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+  </dialog>

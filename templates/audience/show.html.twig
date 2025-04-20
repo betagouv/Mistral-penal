@@ -1,0 +1,84 @@
+{#
+  MIT License
+
+  Copyright (c) 2025 [Mistral pénal]
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+#}
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}{{'instance_of_service.show.title'|trans}}{% endblock %}
+
+{% block body %}
+<div class="fr-grid-row">
+    <div class="fr-col-12 audience-bandeau fr-p-2w">
+        {% if audience is defined and audience is not null %}
+            <div class="fr-grid-row">
+                <div class="fr-col-8">
+                    <h2><i class="ri-folder-line circle-icon"></i> Audience du <br></h2>
+                    <h1>{{audience.date|format_datetime('full', 'none', locale='fr')|capitalize}} - {{audience.debut}}</h1>
+                    <h3>{{audience.service.label}} - {{audience.specialty}}</h3>
+                </div>
+
+                <div id="chrono-container" class="fr-col-4">
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="fr-col-12 fr-pt-5w"></div>
+
+    <div class="fr-col-3">
+    {% include 'affaire/list.html.twig' with {'audience': audience} %}
+    </div>
+
+    <div id="affaire" class="fr-col-9">
+    {% if affaire is defined and affaire is not null %}
+    {% include 'affaire/details.html.twig' with {'affaire': affaire} %}
+    {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {% set noteAudienceUpdate = null %}
+    {% if affaire is defined and affaire is not null and affaire.noteAudiences|length > 0 %}
+        {% set noteAudienceUpdate = affaire.noteAudiences[0].update|date("Y-m-d G:i:s", "GMT") %}
+    {% endif %}
+    <script>
+        const audienceId = '{{ audience.id }}';
+        const noteAudienceUpdate = '{{ noteAudienceUpdate }}';
+        const localKey = '{{ app.session.get("localKey") }}';
+        const outdated = '{{ outdated is defined ? outdated|date("Y-m-d G:i:s", "GMT") : "now"|date("Y-m-d G:i:s", "GMT") }}';
+    </script>
+    {{ parent() }}
+    {{ encore_entry_script_tags('affaire_index') }}
+    {{ encore_entry_script_tags('affaire_decision') }}
+    {{ encore_entry_script_tags('affaire_renvoi') }}
+    {{ encore_entry_script_tags('affaire_representant_legal') }}
+    {{ encore_entry_script_tags('affaire_note_audience') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('affaire_note_audience') }}
+{% endblock %}

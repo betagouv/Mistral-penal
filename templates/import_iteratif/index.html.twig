@@ -1,0 +1,198 @@
+{#
+  MIT License
+
+  Copyright (c) 2025 [Mistral pénal]
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+#}
+
+
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+  {{ parent() }}
+    {{ encore_entry_script_tags('import_iteratif_index') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+    .bar {
+      width: 100%;
+      height: 1em;
+      position: relative;
+      border-radius: 0.5em;
+      background: #f2f2f2;
+      box-shadow: inset 0 0 0 1px  rgba(0,0,0,0.1);
+    }
+    .bar .percentage {
+      position: relative;
+      font-size: 1em;
+      background: blue;
+      height: 1em;
+      border-radius: 0.5em;
+    }
+    .has-tip:before, .has-tip:after {
+      content: "";
+      position: absolute;
+      opacity: 0;
+    }
+    .has-tip:before {
+      bottom: -10px;
+      right: -5px;
+      border: 5px solid;
+      border-color: transparent transparent blue transparent;
+      transition: opacity 0.1s;
+    }
+    .has-tip:hover:before, .has-tip.active:before {
+      opacity: 1;
+    }
+    .has-tip:after {
+      content: attr(perc);
+      bottom: 0;
+      right: 0;
+      white-space: nowrap;
+      padding: 0.6em 1em;
+      border-radius: 2em;
+      line-height: 1;
+      color: #fff;
+      background: blue;
+      transform: translateX(50%) translateY(100%);
+      transition: transform 0.2s, opacity 0.1s;
+    }
+    .has-tip:hover:after, .has-tip.active:after {
+      opacity: 1;
+      transform: translateX(50%) translateY(100%) translateY(10px);
+    }
+    </style>
+{% endblock %}
+
+{% block title %}
+{{ 'import.iteratif.title'|trans }}
+{% endblock %}
+
+{% block body %}
+{{ form_start(form) }}
+<div class="fr-grid-row" style="background-color:#F5F5FE;">
+  <div class="fr-col-1 hide">
+    {{form_widget(form.day)}}
+  </div>
+  <div class="fr-col-7 hide">
+    {{form_widget(form.month)}}
+  </div>
+  <div class="fr-col-4 hide">
+    {{form_widget(form.submit)}}
+  </div>
+  <div class="fr-col-4 hide">
+    {{form_widget(form.id)}}
+  </div>
+
+  <div class="fr-col-1">
+  </div>
+  <div class="fr-col-10">
+    <div class="fr-grid-row" style="background-color:#F5F5FE;">
+      <div class="fr-col-1 fr-pl-2w fr-pt-4w ">
+        <img
+          src="{{ asset('build/images/system.svg') }}"
+          alt="Calendrier"
+          height="60"
+          width="60"
+        />
+      </div>
+      <div class="fr-col-10 fr-pt-4w">
+          <h1 data-default-label="{{'import.affaire.subtitle'|trans}}" class="fr-modal-audience-title bar-label"></h1>
+      </div>
+      <div class="fr-col-1 fr-pl-2w fr-pt-4w">
+        <img
+          class="icon-waiting"
+          src="{{ asset('build/images/waiting.gif') }}"
+          alt="waiting"
+          height="60"
+          width="60"
+        />
+        <img
+          class="icon-success hide"
+          src="{{ asset('build/images/success.svg') }}"
+          alt="success"
+          height="60"
+          width="60"
+        />
+        <img
+          class="icon-error hide"
+          src="{{ asset('build/images/error.svg') }}"
+          alt="error"
+          height="60"
+          width="60"
+        />
+      </div>
+      <div class="fr-col-12">
+        <div class="bar">
+          <div class="percentage has-tip"  style="width: 0%" data-perc="50%">
+          </div>
+        </div>
+      </div>
+      <div class="fr-col-12">
+        <strong
+          class="bar-chapo"
+          data-day="{{form.day.vars.value}}"
+          data-month="{{form.month.vars.value}}"
+        ></strong>
+        <p class="bar-audience"></p>
+        <h1>
+          <img
+            src="{{ asset('build/images/separator.svg') }}"
+            alt="Trait de séparation"
+            height="24px"
+            width="24px"
+          />
+        </h1>
+        <p class="comment-success">{{'import.affaire.comment'|trans}}</p>
+        <p class="content-failed hide" style="font-weight:bold;color: red;">
+        {{'import.affaire.error'|trans}}<br/>
+        Erreur : <span class="content-message-failed"></span>
+        </p>
+        <p>
+          <table class="fr-table content-success">
+            <tr>
+              <th>Audiences restant à importer</th>
+              <th>Dossiers restant à importer sur l'audience courante</th>
+              <th>Personnes restant à importer sur le dossier courant</th>
+            </tr>
+            <tr>
+              <td id="audience_area">Initialisation</td>
+              <td id="affaire_area">Initialisation</td>
+              <td id="personne_area">Initialisation</td>
+            </tr>
+          </table>
+        </p>
+      </div>
+      <div class="fr-col-12 btn-reload hide">
+        <a href="" class="fr-btn">
+          <i class="ri-refresh-line"></i> {{'import.affaire.refresh'|trans}}
+        </a>
+        <br/>
+        &nbsp;
+      </div>
+    </div>
+  </div>
+  <div class="fr-col-1">
+  </div>
+</div>
+{{ form_end(form) }}
+{% endblock %}

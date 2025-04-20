@@ -1,0 +1,15 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  App\Repository\AudienceRepository:
+    public: true
+    autowire: true
+    autoconfigure: true
+
+  App\Repository\Security\AccountRepository:
+    public: true
+    autowire: true
+    autoconfigure: true

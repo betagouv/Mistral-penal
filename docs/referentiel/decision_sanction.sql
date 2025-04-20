@@ -1,0 +1,9 @@
+INSERT INTO webapp.decision_sanction(id, code, libelle, mnemo, ordre)VALUES(nextval('webapp.decision_sanction_id_seq'), '999', 'Ajournement consignation','', '1') ON CONFLICT DO NOTHING;
+INSERT INTO webapp.decision_sanction(id, code, libelle, mnemo, ordre)VALUES(nextval('webapp.decision_sanction_id_seq'), '999', 'Ajournement injonctione','', '2') ON CONFLICT DO NOTHING;
+INSERT INTO webapp.decision_sanction(id, code, libelle, mnemo, ordre)VALUES(nextval('webapp.decision_sanction_id_seq'), '999', 'Ajournement investigations','', '3') ON CONFLICT DO NOTHING;
+INSERT INTO webapp.decision_sanction(id, code, libelle, mnemo, ordre)VALUES(nextval('webapp.decision_sanction_id_seq'), '999', 'Ajournement MAE','', '4') ON CONFLICT DO NOTHING;
+INSERT INTO webapp.decision_sanction(id, code, libelle, mnemo, ordre)VALUES(nextval('webapp.decision_sanction_id_seq'), '999', 'Ajournement simple peine','', '5') ON CONFLICT DO NOTHING;
+INSERT INTO webapp.decision_sanction(id, code, libelle, mnemo, ordre)VALUES(nextval('webapp.decision_sanction_id_seq'), '999', 'Amnistie','', '6') ON CONFLICT DO NOTHING;
+INSERT INTO webapp.decision_sanction(id, code, libelle, mnemo, ordre)VALUES(nextval('webapp.decision_sanction_id_seq'), '999', 'Condamnation','', '7') ON CONFLICT DO NOTHING;
+INSERT INTO webapp.decision_sanction(id, code, libelle, mnemo, ordre)VALUES(nextval('webapp.decision_sanction_id_seq'), '999', 'Dispense de peine','', '8') ON CONFLICT DO NOTHING;
+INSERT INTO webapp.decision_sanction(id, code, libelle, mnemo, ordre)VALUES(nextval('webapp.decision_sanction_id_seq'), '999', 'Exemption de peine','', '9') ON CONFLICT DO NOTHING;

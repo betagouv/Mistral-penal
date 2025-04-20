@@ -1,0 +1,17 @@
+controllers:
+  resource:
+    path: ../src/Controller/
+    namespace: App\Controller
+  type: attribute
+index:
+  path: /
+  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
+  defaults:
+    route: 'homepage'
+
+when@dev:
+  fakeapi:
+    resource:
+      path: ../src/FakeApi/Controller/
+      namespace: App\FakeApi\Controller
+    type: attribute

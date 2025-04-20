@@ -1,0 +1,115 @@
+{#
+  MIT License
+
+  Copyright (c) 2025 [Mistral pénal]
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+#}
+
+{# DECISION #}
+<div class="fr-grid-row">
+    <div class="fr-col-12">
+        <h2 class="fr-accordion__title affaire-section">{{ 'decision.title' | trans}}</h2>
+        <data id="affaireNatinfs-codes" data-codes="{{ natinfsCodes(affaire) | serialize('json') }}"></data>
+            <div class="fr-accordions-group" id="decisions-container">
+                {% set randDecision = random() %}
+                {% for affairePersonne in affaire.affairePersonnes|filter(affairePersonne => (affairePersonne.statut is not null) and affairePersonne.statut.canMakeDecisions) %}
+                    {% set statutPersonne = affairePersonne.statut %}
+                    {% if statutPersonne and (statutPersonne.libelle != 'Victime') %}
+                        <section class="fr-accordion">
+                            <h3 class="fr-accordion__title">
+                                <button class="fr-accordion__btn affaire-personne"
+                                aria-expanded="false"
+                                aria-controls="accordion-{{ randDecision + loop.index }}"
+                                >
+                                    {{ affairePersonne.personne.nomComplet }}
+                                </button>
+                            </h3>
+                            <div class="fr-collapse" id="accordion-{{ randDecision + loop.index }}">
+                                    <div id="decision-container-{{ affairePersonne.id }}" class="fr-grid-row">
+                                        {% set index = 1 %}
+                                        {% for decision in affaire.decisions %}
+                                            {% if decision.affairePersonne.id == affairePersonne.id %}
+                                                <div id="decision-card-{{ decision.id }}"
+                                                    class="fr-col-12"
+                                                    data-index="{{ index }}"
+                                                    id="decision_card_{{ decision.id }}"
+                                                    data-affairePersonne-id="{{ affairePersonne.id }}"
+                                                    data-decision-id="{{ decision.id }}"
+                                                    data-decision="{{ decision | serialize('json', { groups: 'read' }) }}"
+                                                ></div>
+                                                {% set index = (index + 1) %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+
+                                    <div class="fr-grid-row">
+                                        <div class="fr-col-12 fr-pt-1w">
+                                            <button
+                                                id="btn-nouvelle-decision-{{ affairePersonne.id }}"
+                                                data-affairePersonneId="{{ affairePersonne.id }}"
+                                                data-natinfs="{{ natinfsForPersonne(affaire, affairePersonne.id) }}"
+                                                data-affaire="{{ affaire.id }}"
+                                                class="fr-btn fr-btn--tertiary fr-btn-mistral"
+                                                data-fr-opened="false"
+                                                aria-controls="fr-modal-decision"
+                                            >
+                                                <i class="ri-add-line fr-ml-1w"></i>
+                                                Ajouter une decision
+                                            </button>
+                                        </div>
+                                    </div>
+
+                            </div>
+                        </section>
+                    {% endif %}
+                {% endfor %}
+            </div>
+    </div>
+    <div class="fr-col-12 fr-pt-1w"></div>
+    <div class="fr-col-12">
+    </div>
+</div>
+
+{# MODAL #}
+<dialog
+    aria-labelledby="fr-modal-decision-title"
+    id="fr-modal-decision"
+    class="fr-modal"
+    role="dialog"
+>
+    <div class="fr-container fr-container--fluid fr-container-md">
+        <div class="fr-grid-row fr-grid-row--center">
+            <div class="fr-col-12 fr-col-md-8">
+                <div class="fr-modal__body">
+                    <div class="fr-modal__header">
+                        <span class="renvoi-modal-title">Décision</span>
+                        <button class="fr-btn--close fr-btn" title="Fermer la fenêtre modale" aria-controls="fr-modal-decision">Annuler</button>
+                    </div>
+                    <div class="fr-modal__content content-modal-decision">
+                        <div id="natinfs-container-builder">
+                            {% include 'affaire/_decision_modal.html.twig' with {'formDecision': formDecision, 'affaire' : affaire} %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</dialog>

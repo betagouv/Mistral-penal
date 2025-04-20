@@ -1,0 +1,64 @@
+{#
+  MIT License
+
+  Copyright (c) 2025 [Mistral pénal]
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+#}
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}{{'instance_of_service.admin_func_change_mdp.title'|trans}}{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="fr-grid-row" style="background-color:#F5F5FE; height:124px">
+  <div class="fr-col-12">
+    <h1>{{title|trans}}</h1>
+  </div>
+</div>
+{{form_start(form)}}
+<div class="fr-grid-row">
+  {% set errors = form.vars.errors.form.getErrors(true) %}
+  <div class="fr-col-12">
+    {% for error in errors %}
+    <span class='fr-badge fr-badge--warning'>{{error.message|trans}}</span>
+    {% endfor %}
+  </div>
+
+  <div class="fr-col-12">{{'instance_of_service.admin_func_change_mdp.text'|trans}}</div>
+  <div class="fr-col-12">
+  {{form_widget(form.password)}}
+  </div>
+  <div class="fr-col-11">&nbsp;</div>
+  <div class="fr-col-1">{{form_row(form.search)}}</div>
+  <div class="fr-col-12">
+  <span class='fr-badge fr-badge--info'>{{'instance_of_service.admin_func_change_mdp.info'|trans}}</span>
+  </div>
+</div>
+{{form_end(form)}}
+{% endblock %}

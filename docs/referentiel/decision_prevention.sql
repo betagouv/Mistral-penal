@@ -1,0 +1,5 @@
+INSERT INTO webapp.decision_prevention(id, code, libelle, mnemo, ordre)VALUES(nextval('webapp.decision_prevention_id_seq'), '999', 'Culpabilité','', '1') ON CONFLICT DO NOTHING;
+INSERT INTO webapp.decision_prevention(id, code, libelle, mnemo, ordre)VALUES(nextval('webapp.decision_prevention_id_seq'), '999', 'Irresponsabilité pénale','', '2') ON CONFLICT DO NOTHING;
+INSERT INTO webapp.decision_prevention(id, code, libelle, mnemo, ordre)VALUES(nextval('webapp.decision_prevention_id_seq'), '999', 'Irresponsabilité trouble mental','', '3') ON CONFLICT DO NOTHING;
+INSERT INTO webapp.decision_prevention(id, code, libelle, mnemo, ordre)VALUES(nextval('webapp.decision_prevention_id_seq'), '999', 'Non lieu à statuer','', '4') ON CONFLICT DO NOTHING;
+INSERT INTO webapp.decision_prevention(id, code, libelle, mnemo, ordre)VALUES(nextval('webapp.decision_prevention_id_seq'), '999', 'Relaxe','', '5') ON CONFLICT DO NOTHING;

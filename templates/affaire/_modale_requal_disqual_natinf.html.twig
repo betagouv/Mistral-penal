@@ -1,0 +1,113 @@
+{#
+  MIT License
+
+  Copyright (c) 2025 [Mistral pénal]
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+#}
+
+
+<div
+  data-fr-opened="false"
+  aria-controls="modale-requal-disqual-natinf"
+  id="declencheur-requal-disqual-natinf">
+</div>
+
+<dialog
+  id="modale-requal-disqual-natinf"
+  class="fr-modal"
+  role="dialog"
+  aria-labelledby="modale-requal-disqual-natinf-title">
+    <div class="fr-container fr-container--fluid fr-container-md">
+        <div class="fr-grid-row fr-grid-row--center">
+            <div class="fr-col-12 fr-col-md-8">
+                <div class="fr-modal__body">
+                    <div class="fr-modal__header">
+                        <span class="natinf-title">{{'natinf.modal.requal_disqual_title'|trans}}</span>
+                        <button class="fr-btn--close fr-btn" aria-controls="modale-requal-disqual-natinf" id="button-4929" title="Fermer">
+                        {{'globals.btn.close'|trans}}
+                        </button>
+                    </div>
+                    <div class="fr-modal__content">
+                    {% if formNatinfRequalDisqual is defined %}
+                    {{form_start(formNatinfRequalDisqual)}}
+                    {{form_widget(formNatinfRequalDisqual.id)}}
+                    {{form_widget(formNatinfRequalDisqual.natinfId)}}
+                    {{form_widget(formNatinfRequalDisqual.communeId)}}
+                    <div class="fr-grid-row">
+                        <div class="fr-col-12">
+                          <label class="form-label">{{'affaire_natinf.display.new_natinf'|trans}}</label>
+                        </div>
+                        <div class="fr-col-12">{{form_widget(formNatinfRequalDisqual.natinf)}}</div>
+                        <div class="fr-col-12 fr-mt-1w"></div>
+                        <div class="fr-col-12">{{form_label(formNatinfRequalDisqual.qualificationDeveloppee)}}</div>
+                        <div class="fr-col-12">{{form_widget(formNatinfRequalDisqual.qualificationDeveloppee)}}</div>
+                        <div class="fr-col-12 fr-mt-1w"></div>
+                        <div class="fr-col-12"><hr class="hr"/></div>
+                        <div class="fr-col-12 fr-mt-1w"></div>
+                        <div class="fr-col-12">
+                        {% include 'operateur_horodatage/_edit.html.twig' with {'form': formNatinfRequalDisqual.debut, 'title': 'operateur_horodatage.display.start'|trans} %}
+                        </div>
+                        <div class="fr-col-12 fr-mt-1w"></div>
+                        <div class="fr-col-12">
+                        {% include 'operateur_horodatage/_edit.html.twig' with {'form': formNatinfRequalDisqual.fin, 'title': 'operateur_horodatage.display.end'|trans} %}
+                        </div>
+                        <div class="fr-col-12 fr-mt-1w"></div>
+                        <div class="fr-col-1">{{form_label(formNatinfRequalDisqual.commune)}}</div>
+                        <div class="fr-col-5">{{form_widget(formNatinfRequalDisqual.commune)}}</div>
+                        <div class="fr-col-1">{{form_label(formNatinfRequalDisqual.lieu)}}</div>
+                        <div class="fr-col-5">{{form_widget(formNatinfRequalDisqual.lieu)}}</div>
+
+                        <div class="fr-col-12 fr-mt-1w"></div>
+                        <div class="fr-col-12"><hr class="hr"/></div>
+                        <div class="fr-col-12 fr-mt-1w"></div>
+                        <div class="fr-col-12 fr-mt-1w"></div>
+                        <div class="fr-col-12">
+                          <label class="form-label">{{'affaire_natinf.display.personnes_impliquees'|trans}}</label>
+                        </div>
+                        <div class="fr-col-12 fr-table fr-table--bordered">
+                          <table>
+                            <thead>
+                              <tr>
+                                <th>{{'affaire_natinf.display.personne'|trans}}</th>
+                                <th>{{'affaire_natinf.display.statut'|trans}}</th>
+                              </tr>
+                            </thead>
+                            <tbody id="natinf_requal_disqual_personnes">
+                            </tbody>
+                          </table>
+                        </div>
+                    </div>
+                    {{form_end(formNatinfRequalDisqual)}}
+                    {% endif %}
+                    </div>
+                    <div class="fr-modal__footer">
+                        <ul class="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse fr-btns-group--inline-lg fr-btns-group--icon-left">
+                            <li>
+                                <button class="fr-btn fr-icon-checkbox-line" onclick="javascript:saveDisqualRequalNatinf();">
+                                {{'globals.btn.submit'|trans}}
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</dialog>

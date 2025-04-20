@@ -1,0 +1,26 @@
+# Read the documentation: https://symfony.com/doc/current/bundles/FOSCKEditorBundle/index.html
+fos_ck_editor:
+    default_config: minimal
+    base_path: "build/ckeditor"
+    js_path:   "build/ckeditor/ckeditor.js"
+    configs:
+        minimal:
+            toolbar: "minimal_toolbar"
+            uiColor: "#eeeeee"
+            extraPlugins: "autosave, wordcount, maximize, autocomplete, textmatch, resize"
+    toolbars:
+        configs:
+            minimal_toolbar: [ [ 'Bold', 'Italic', 'Underline', 'Maximize', '-' ] ]
+    plugins:
+        autosave:
+            path: "/build/ckeditor/plugins/autosave/"
+            filename: "plugin.js"
+        wordcount:
+            path: "/build/ckeditor/plugins/wordcount/"
+            filename: "plugin.js"
+        autocomplete:
+            path: "/build/ckeditor/plugins/autocomplete/"
+            filename: "plugin.js"
+        textmatch:
+            path: "/build/ckeditor/plugins/textmatch/"
+            filename: "plugin.js"

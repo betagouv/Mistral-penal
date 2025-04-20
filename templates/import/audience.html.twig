@@ -1,0 +1,80 @@
+{#
+  MIT License
+
+  Copyright (c) 2025 [Mistral pénal]
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+#}
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}{{'import.audience.title'|translate({'%month%': month_plaintext(month), '%year%': year})}}{% endblock %}
+
+{% block body %}
+<div class="fr-table fr-table--bordered">
+  <table>
+    <caption>{{'import.audience.title'|translate({'%month%': month_plaintext(month), '%year%': year})}}</caption>
+    <thead>
+      <tr>
+        <th scope="col">{{'globals.calendar.day'|trans}}</th>
+        <th scope="col">{{'import.audience.audiences'|trans}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in 1..last_day(year,month) %}
+      <tr>
+        <td>{{ build_date(i,month,year)|datePlaintext }}</td>
+        <td>
+        {% for item in audiences[i] %}
+          <div class="fr-card">
+            <div class="fr-card__body">
+              <div class="fr-card__content">
+                <p class="fr-card__desc">
+                {{item['plaintext']}}
+
+                  <button type="button" onClick="javascript:updateAudience('{{item['id']}}', '{{item['id_ksp']}}');" class="fr-btn hide-on-import" title="{{'globals.btn.import'|trans}}">
+                    <i class="ri-arrow-left-right-line"></i>
+                  </button>
+
+                </p>
+                {% if item['date_dernier_import'] %}
+                <p class="fr-badge fr-badge--green-emeraude">
+                maj: {{item['date_dernier_import']|toDate|dateSmall}}
+                </p>
+                {% else %}
+                  <p class="fr-badge fr-badge--error">
+                jamais importé
+                </p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('import_audience') }}
+{% endblock %}

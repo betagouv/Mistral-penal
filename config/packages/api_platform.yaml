@@ -1,0 +1,17 @@
+api_platform:
+    use_symfony_listeners: false
+    serializer:
+      hydra_prefix: true
+    formats:
+      jsonld: ['application/ld+json']
+      json: ['application/json']
+    mapping:
+        paths: ['%kernel.project_dir%/src/Entity']
+    patch_formats:
+        json: ['application/merge-patch+json']
+    swagger:
+        versions: [3]
+    defaults:
+        pagination_enabled: false
+        extra_properties:
+          standard_put: true
