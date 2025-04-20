@@ -1,4 +1,6 @@
-# Application MISTRAL
+# Application MISTRAL PENAL
+
+La branche Mistral-v1 correspond à la version 1 de l'outil numérique. Il s'agit d'un MVP.
 
 ## Présentation générale
 
