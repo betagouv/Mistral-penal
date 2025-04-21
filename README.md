@@ -1,4 +1,9 @@
-# Application MISTRAL
+# Application MISTRAL PENAL
+
+La branche Mistral-v1 correspond à la version 1 de l'outil numérique. Il s'agit d'un MVP.
+
+Plus d'information : https://beta.gouv.fr/startups/mistral-penal.html
+https://mistralpenal.beta.gouv.fr/
 
 ## Présentation générale
 
