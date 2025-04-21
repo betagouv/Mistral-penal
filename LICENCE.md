@@ -7,7 +7,7 @@ Ce projet est distribué sous la licence MIT. Tu es libre de l’utiliser, le mo
 ## Informations sur le projet
 
 - **Nom du projet** : MISTRAL PENAL
-- **Auteur** : Equipe MISTRAL - développeurs : Yannick ROUSSEL, Vicent MONTUCLARD, Sylvain MAHE, Arthur MAHE  
+- **Auteur** : Equipe MISTRAL - développeurs : Yannick ROUSSEL, Vicent MONTUCLARD, Sylvain MAHE, Arthur MAURER  
 - **Année de publication** : 2025
 - **Version** : V1 
 - **URL du projet** : https://github.com/betagouv/Mistral-penal
